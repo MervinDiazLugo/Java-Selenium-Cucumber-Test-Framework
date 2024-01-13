@@ -1,4 +1,4 @@
-@UdemyTest
+@UdemyWebTest
 Feature: An example
 
   Scenario: The example

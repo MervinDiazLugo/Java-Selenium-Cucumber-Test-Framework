@@ -4,7 +4,7 @@ import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(
-    tags = "@UdemyTest",
+    tags = "@UdemyWebTest",
     features = "src/test/resources/udemy",
     glue = "udemy.StepDefinitions",
     plugin = {

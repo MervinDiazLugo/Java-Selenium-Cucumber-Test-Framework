@@ -15,7 +15,7 @@
         <selenium.version>3.141.59</selenium.version>
         <maven.cucumber.reporting.version>5.7.6</maven.cucumber.reporting.version>
         <defaultSuiteFiles>
-            **RunUdemyCucumberTestRunner.xml,
+            WebUdemyCucumberTestRunner.xml,
         </defaultSuiteFiles>
         <suiteFile>${defaultSuiteFiles}</suiteFile>
     </properties>
