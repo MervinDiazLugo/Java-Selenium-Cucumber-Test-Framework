@@ -6,7 +6,7 @@
         <parameter name="browser" value="chrome" />
         <classes>
             <class
-                    name="udemy.runner.RunUdemyCucumberTestRunner" />
+                    name="udemy.runners.web.WebUdemyCucumberTestRunner" />
         </classes>
     </test>
 </suite>

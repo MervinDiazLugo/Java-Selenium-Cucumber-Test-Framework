@@ -1,4 +1,4 @@
-package udemy.runner;
+package udemy.runners.web;
 
 import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
 

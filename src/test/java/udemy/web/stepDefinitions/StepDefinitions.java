@@ -1,4 +1,4 @@
-package udemy.stepDefinitions;
+package udemy.web.stepDefinitions;
 
 import io.cucumber.java.en.*;
 

@@ -1,4 +1,4 @@
-package udemy.runner;
+package udemy.runners.web;
 
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
@@ -13,4 +13,4 @@ import io.cucumber.testng.CucumberOptions;
       "json:target/cucumber/cucumber.json",
       "html:target/cucumber-html-report.html"
     })
-public class RunUdemyCucumberTestRunner extends AbstractTestNGCucumberTests {}
+public class WebUdemyCucumberTestRunner extends AbstractTestNGCucumberTests {}
