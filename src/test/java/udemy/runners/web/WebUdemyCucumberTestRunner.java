@@ -6,7 +6,7 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberOptions(
     tags = "@UdemyWebTest",
     features = "src/test/resources/udemy",
-    glue = "udemy.StepDefinitions",
+    glue = "udemy.web.stepDefinitions",
     plugin = {
       "pretty",
       "html:test-output",
