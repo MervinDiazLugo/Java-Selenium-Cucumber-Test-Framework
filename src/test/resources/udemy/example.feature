@@ -1,4 +1,4 @@
-@UdemyWebTest
+@UdemyWebTest @WebTesting
 Feature: An example
 
   Scenario: The example
