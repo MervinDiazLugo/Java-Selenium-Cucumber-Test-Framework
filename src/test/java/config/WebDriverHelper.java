@@ -52,13 +52,14 @@ public class WebDriverHelper extends BaseConfigProperties {
 
   public void getMainSite(String client) {
     String url;
-    switch (client) {
-      case "MyMainSite":
-        url = "";
-        break;
-      default:
-        url = "www.google.com";
+    if(StringUtils.equals(client, "google")){
+      url = "https://www.google.com";
+    }else  if(StringUtils.equals(client, "Emergencias")){
+      url = "https://purchase-testing.klimber.com/ar/Emergencias/Index";
+    }else{
+      url = "https://www.udemy.com/";
     }
+
     driver.manage().window().setSize(new Dimension(1920, 1200));
     log.info("Navigate to: " + url);
     driver.get(url);
