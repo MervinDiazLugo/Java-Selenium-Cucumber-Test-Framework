@@ -8,11 +8,12 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 @CucumberOptions(
-    tags = "@UdemyWebTest",
+    tags = "@UdemyWebTest and not @Ignore",
     features = "src/test/resources/udemy",
     glue = "udemy.web.StepDefinitions",
     plugin = {
       "pretty",
+      "summary",
       "html:test-output",
       "json:target/cucumber/cucumber.json",
       "html:target/cucumber-html-report.html"
