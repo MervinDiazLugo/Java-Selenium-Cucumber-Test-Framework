@@ -3,27 +3,23 @@ package udemy.web.StepDefinitions;
 import config.BaseConfigProperties;
 import config.ConfigDriver;
 import io.cucumber.java.After;
-import io.cucumber.java.AfterAll;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
+import io.cucumber.testng.AbstractTestNGCucumberTests;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.*;
 import org.testng.log4testng.Logger;
 
-public class Hooks {
+public class Hooks extends AbstractTestNGCucumberTests {
   public static WebDriver driver;
   public static Map<String, String> mainWindowsHandle = new HashMap<>();
-
-  private static BaseConfigProperties properties = new BaseConfigProperties();
   Logger log = Logger.getLogger(Hooks.class);
   Scenario scenario = null;
-
 
   public static JSONObject testData = new JSONObject();
 
@@ -44,7 +40,6 @@ public class Hooks {
         "***********************************************************************************************************");
   }
 
-
   @After("@WebTesting")
   /** Embed a screenshot in test report if test is marked as failed */
   public void embedScreenshot(Scenario scenario) throws IOException {
@@ -54,10 +49,12 @@ public class Hooks {
         scenario.log("The scenario failed.");
         byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
         scenario.attach(
-            screenshot, "JPG", properties.getCurrentPath() + "/src/test/resources/screenshots/");
+            screenshot,
+            "JPG",
+            BaseConfigProperties.getCurrentPath() + "/src/test/resources/screenshots/");
         File destFile =
             new File(
-                    properties.getCurrentPath()
+                BaseConfigProperties.getCurrentPath()
                     + "/src/test/resources/screenshots/"
                     + scenario.getId()
                     + scenario.getName()

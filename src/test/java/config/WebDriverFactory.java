@@ -64,15 +64,7 @@ public class WebDriverFactory extends BaseConfigProperties {
       prefs.put("download.prompt_for_download", false);
       options.setExperimentalOption("prefs", prefs);
       options.addArguments("--no-sandbox", "--disable-dev-shm-usage");
-      try {
-        driver = new ChromeDriver(options);
-      } catch (SessionNotCreatedException e) {
-        log.info(e.getMessage());
-        log.info("Local chromedriver failed. Creating session using boni garcia");
-        WebDriverManager.chromedriver().clearResolutionCache().forceDownload().setup();
-        driver = new ChromeDriver(options);
-      }
-
+      driver = new ChromeDriver(options);
     } else if ("ZAP".equalsIgnoreCase(platform)) {
       DesiredCapabilities capabilities = DesiredCapabilities.chrome();
       capabilities.setCapability("proxy", zapProxy);

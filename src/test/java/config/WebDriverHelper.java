@@ -50,19 +50,11 @@ public class WebDriverHelper extends BaseConfigProperties {
     this.scenario = scenario;
   }
 
-  public void getMainSite(String client) {
-    String url;
-    if(StringUtils.equals(client, "google")){
-      url = "https://www.google.com";
-    }else  if(StringUtils.equals(client, "Emergencias")){
-      url = "https://purchase-testing.klimber.com/ar/Emergencias/Index";
-    }else{
-      url = "https://www.udemy.com/";
-    }
-
+  public void getMainSite() {
+    URL_BASE = getUrlBase();
     driver.manage().window().setSize(new Dimension(1920, 1200));
-    log.info("Navigate to: " + url);
-    driver.get(url);
+    log.info("Navigate to: " + URL_BASE);
+    driver.get(URL_BASE);
     waitPageCompletelyLoaded();
   }
 
@@ -196,7 +188,7 @@ public class WebDriverHelper extends BaseConfigProperties {
   public void webJsSendKeys(By locator, String value) {
     JavascriptExecutor jse = (JavascriptExecutor) driver;
     WebElement elem = driver.findElement(locator) != null ? driver.findElement(locator) : null;
-    //log.info("Scrolling to element: " + SeleniumElement.getText());
+    // log.info("Scrolling to element: " + SeleniumElement.getText());
     if (elem != null) {
       jse.executeScript(String.format("arguments[0].value='%s';", value), elem);
     }
@@ -811,5 +803,4 @@ public class WebDriverHelper extends BaseConfigProperties {
     int maxValue = 40000000;
     return new Random().nextInt(maxValue - minValue + 1) + minValue;
   }
-
 }

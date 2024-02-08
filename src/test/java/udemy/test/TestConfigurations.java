@@ -1,17 +1,78 @@
 package udemy.test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class TestConfigurations {
 
   public int multi(int numA, int numB) {
-    int result;
-    result = numA * numB;
-
+    int result = numA * numB;
     return result;
+  }
+
+  public int suma(int numA, int numB) {
+    int result = numA + numB;
+    return result;
+  }
+
+  private String fullName(String firstName, String lastName) {
+    return firstName + " " + lastName;
+  }
+
+  private List<String> nameList() {
+    List<String> myList = new ArrayList<>();
+
+    myList.add("Slinky");
+    myList.add("Dukko");
+    myList.add("Diana");
+    myList.add("Pancho");
+
+    return myList;
+  }
+
+  private String[] nameArrayList() {
+    // String[] myPetList = {"Slinky", "Dukko", "Diana", "Pancho"};
+    String[] myList = {"Slinky", "Dukko", "Diana", "Pancho"};
+    return myList;
+  }
+
+  private boolean getMyPet(String pet) {
+    boolean isPresent = false;
+
+    List<String> myPetList = nameList();
+
+    for (String petName : myPetList) {
+      isPresent = StringUtils.equalsIgnoreCase(petName, pet);
+      if (isPresent) {
+        break;
+      }
+    }
+    return isPresent;
+  }
+
+  @Test
+  public void mainTest() {
+    String fullName = fullName("Ana", "Sanchez");
+    assertEquals(fullName, "Ana Sanchez", fullName + " debe ser Ana Sanchez");
+
+    List<String> myList = nameList();
+    assertTrue(myList.size() == 4, myList.size() + " La lista no es de 4");
+
+    boolean isPresent = getMyPet("Diana");
+    assertTrue(isPresent, "Diana no esta en la lista");
+
+    String getName =
+        nameList().stream()
+            .filter(petName -> StringUtils.equalsIgnoreCase(petName, "Diana"))
+            .findFirst()
+            .orElse("");
+    StringUtils.equalsIgnoreCase(getName, "Diana");
   }
 
   @Test
@@ -39,6 +100,6 @@ public class TestConfigurations {
   @Test
   @DisplayName("Test multiplicationOfZero")
   public void multiplicationOfZero_one() {
-    assertEquals(0, multi(10, 0), "10 x 0 debe ser 0");
+    assertEquals(multi(10, 0), 0, "10 x 0 debe ser 0");
   }
 }
