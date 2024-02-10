@@ -30,7 +30,7 @@ import org.testng.log4testng.Logger;
 import udemy.web.StepDefinitions.Hooks;
 
 public class WebDriverHelper extends BaseConfigProperties {
-    static WebDriver driver;
+    public static WebDriver driver;
 
     private static Logger log = Logger.getLogger(WebDriverHelper.class);
     public static JSONObject scenarioData = new JSONObject();

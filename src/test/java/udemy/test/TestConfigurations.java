@@ -57,6 +57,20 @@ public class TestConfigurations {
         return isPresent;
     }
 
+    private boolean getMyPet2(String pet) {
+        boolean isPresent = false;
+
+        List<String> myPetList = nameList();
+
+        for (int i = 0; i < myPetList.size(); i++) {
+            isPresent = StringUtils.equalsIgnoreCase(myPetList.get(i), pet);
+            if (isPresent) {
+                break;
+            }
+        }
+        return isPresent;
+    }
+
     @Test
     public void mainTest() {
         String fullName = fullName("Ana", "Sanchez");
@@ -65,7 +79,7 @@ public class TestConfigurations {
         List<String> myList = nameList();
         assertTrue(myList.size() == 4, myList.size() + " La lista no es de 4");
 
-        boolean isPresent = getMyPet("Diana");
+        boolean isPresent = getMyPet2("Diana");
         assertTrue(isPresent, "Diana no esta en la lista");
 
         String getName =
