@@ -17,18 +17,18 @@ Feature: An example
     And click on Siguiente button
     And I wait for last step elements are loaded
     Then I fill registration form with values:
-      | Nombre                  | Maria Jose                  |
-      | Apellido                | Ortiz Rodrigez              |
-      | Fecha de nacimiento     | 13/11/1994                  |
-      | DNI                     | 95624541                    |
+      | Nombre                  | Patricia Jose               |
+      | Apellido                | Ortiz Palermo               |
+      | Fecha de nacimiento     | 13/11/1980                  |
+      | DNI                     | 950624500                   |
       | Sexo biológico          | Femenino                    |
       | Género                  | Femenino                    |
-      | E-mail                  | ortizmarijo1311@gmail.com   |
+      | E-mail                  | correodepruebas@gmail.com   |
       | Cód. área               | 11                          |
-      | Celular                 | 22501118                    |
+      | Celular                 | 22500000                    |
       | Calle                   | Av. Santa Fe                |
-      | Número                  | 2306                        |
+      | Número                  | 500                         |
       | Piso                    | 2                           |
       | Departamento            | C                           |
-      | Código Postal           | 1123                        |
+      | Código Postal           | 2300                        |
       | Ciudad                  | C.A.B.A                     |
