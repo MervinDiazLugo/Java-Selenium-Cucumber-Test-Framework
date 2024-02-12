@@ -168,6 +168,13 @@
             <systemPath>${project.basedir}/src/test/resources/bin/zap/harlib-1.1.1.jar</systemPath>
         </dependency>
 
+        <!-- APPIUM -->
+        <dependency>
+            <groupId>io.appium</groupId>
+            <artifactId>java-client</artifactId>
+            <version>7.3.0</version>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
