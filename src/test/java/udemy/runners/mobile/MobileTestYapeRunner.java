@@ -1,7 +1,6 @@
 package udemy.runners.mobile;
 
 import config.AndroidDriverProperties;
-import config.WebBaseConfigProperties;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 import org.testng.annotations.BeforeTest;
@@ -9,7 +8,7 @@ import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 @CucumberOptions(
-    tags = "@UdemyWebTest and not @Ignore",
+    tags = "@MobileYapeBooking and not @Ignore",
     features = "src/test/resources/udemy/MobileTest/Yape",
     glue = "udemy.web.StepDefinitions",
     plugin = {

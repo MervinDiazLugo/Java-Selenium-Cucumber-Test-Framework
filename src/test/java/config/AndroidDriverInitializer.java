@@ -1,12 +1,13 @@
 package config;
 
+import static config.WebBaseConfigProperties.getCurrentPath;
+
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
-import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.log4testng.Logger;
@@ -71,7 +72,7 @@ public class AndroidDriverInitializer extends AbstractDriverInitializer {
   }
 
   private void getLocalApk() {
-    String localAPK = androidConfigProperties.getAppBase();
+    String localAPK = getCurrentPath() + androidConfigProperties.getAppBase();
     caps.setCapability(MobileCapabilityType.APP, localAPK);
     log.info("apk running is " + localAPK);
   }

@@ -1,7 +1,7 @@
 package udemy.web.StepDefinitions;
 
-import config.WebBaseConfigProperties;
 import config.ConfigDriver;
+import config.WebBaseConfigProperties;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
