@@ -1,0 +1,15 @@
+{
+  "category": {
+    "id": 1232,
+    "name": "Custom Cat"
+  },
+  "name": "Custom name",
+  "photoUrls": [],
+  "tags": [
+    {
+      "id": 2,
+      "name": "54"
+    }
+  ],
+  "status": "available"
+}

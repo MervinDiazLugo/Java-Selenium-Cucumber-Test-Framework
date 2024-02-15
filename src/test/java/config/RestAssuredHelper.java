@@ -4,6 +4,7 @@ import io.cucumber.datatable.DataTable;
 import io.restassured.response.Response;
 import io.restassured.response.ResponseOptions;
 import java.io.IOException;
+import java.net.CacheRequest;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
@@ -20,16 +21,14 @@ import org.json.simple.parser.ParseException;
 import org.testng.SkipException;
 import org.testng.log4testng.Logger;
 
-public class RestAssuredHelper extends RestAssuredConfigProperties {
+public class RestAssuredHelper extends RestAssuredExtension {
   public static Logger log = Logger.getLogger(RestAssuredHelper.class);
 
-  public JSONObject testData = setTestData();
+  public static JSONObject testData = setTestData();
 
   private static final String FORMAT_DATE = "yyyy-MM-dd'T'HH:mm:ss";
 
-  public static ResponseOptions<Response> response = RestAssuredExtension.response;
-
-  public JSONObject setTestData() {
+  public static JSONObject setTestData() {
     JSONObject data = new JSONObject();
     data.put("apiVersion", getApiVersion());
     data.put("uuid", UUID.randomUUID());
@@ -47,7 +46,7 @@ public class RestAssuredHelper extends RestAssuredConfigProperties {
     return data;
   }
 
-  public String addDaysToDate(String startDate, int daysToAdd) {
+  public static String addDaysToDate(String startDate, int daysToAdd) {
     Date currentDatePlusDays = new Date();
     SimpleDateFormat format = new SimpleDateFormat(FORMAT_DATE);
 
@@ -98,12 +97,12 @@ public class RestAssuredHelper extends RestAssuredConfigProperties {
     }
   }
 
-  public String createRandomNumber() {
+  public static String createRandomNumber() {
     long randomNumber = (long) Math.floor(Math.random() * 9000000000000L) + 1000000000000L;
     return String.valueOf(randomNumber);
   }
 
-  private String createRandomCUIL() {
+  private static String createRandomCUIL() {
 
     int[] cuitStartNumbers = {20, 24, 27, 30, 34};
     int randomStartNumberIndex = (int) (Math.random() * 5);
@@ -134,7 +133,7 @@ public class RestAssuredHelper extends RestAssuredConfigProperties {
     return number;
   }
 
-  public String getTodayDate() {
+  public static String getTodayDate() {
     Date currentDate = new Date();
     SimpleDateFormat format = new SimpleDateFormat(FORMAT_DATE);
 
@@ -150,11 +149,11 @@ public class RestAssuredHelper extends RestAssuredConfigProperties {
     return format.format(currentDate);
   }
 
-  public int getCurrentYear() {
+  public static int getCurrentYear() {
     return Year.now().getValue();
   }
 
-  public Date parseDate(String rawDate) throws java.text.ParseException {
+  public static Date parseDate(String rawDate) throws java.text.ParseException {
     Date parseDate = new Date();
     SimpleDateFormat format = new SimpleDateFormat(FORMAT_DATE);
 
@@ -170,7 +169,7 @@ public class RestAssuredHelper extends RestAssuredConfigProperties {
     return parseDate;
   }
 
-  public String insertParams(String stringData) {
+  public static String insertParams(String stringData) {
     StringBuffer stringbuffer = new StringBuffer();
     Pattern pattern = Pattern.compile("\\$(\\w+)");
     Matcher matcher;
@@ -208,7 +207,7 @@ public class RestAssuredHelper extends RestAssuredConfigProperties {
     return stringData;
   }
 
-  public void setModifiedBirthDates(String varName) {
+  public static void setModifiedBirthDates(String varName) {
     String birth_date = testData.get(varName).toString();
     String year = StringUtils.substringBefore(birth_date, "-");
     int yearMinus = getCurrentYear() - 1;
@@ -229,7 +228,7 @@ public class RestAssuredHelper extends RestAssuredConfigProperties {
     return bodyPath;
   }
 
-  public void saveInTestData(String key, String value) {
+  public static void saveInTestData(String key, String value) {
     if (StringUtils.isNotEmpty(key)) {
       if (testData.containsKey(key)) {
         testData.replace(key, value);
@@ -242,29 +241,9 @@ public class RestAssuredHelper extends RestAssuredConfigProperties {
     }
   }
 
-  public String retrieveResponse(String key) {
-    String value = "";
-    ArrayList<String> arrayValue = new ArrayList<>();
-    String classType = response.getBody().path(key).getClass().toString();
-    if (response != null && response.getBody() != null) {
-      if (response.getBody().path(key) != null) {
-        if ("class java.lang.String".equals(classType)) {
-          value = response.getBody().path(key);
-        } else if ("class java.util.ArrayList".equals(classType)) {
-          arrayValue = response.getBody().path(key);
-          value = StringUtils.equals(arrayValue.toString(), "[]") ? "" : arrayValue.toString();
-        }
-      } else {
-        throw new SkipException("Selected path didn't exist ");
-      }
-    } else {
-      throw new SkipException("Response is null or empty");
-    }
 
-    return value;
-  }
 
-  public void getDataFromTable(List<List<String>> table) {
+  public static void getDataFromTable(List<List<String>> table) {
     DataTable data = createDataTable(table);
     if (data != null) {
       data.cells()
@@ -289,7 +268,7 @@ public class RestAssuredHelper extends RestAssuredConfigProperties {
     }
   }
 
-  public void getDataFromResponse(List<List<String>> table) {
+  public static void getDataFromResponse(List<List<String>> table) {
     DataTable data = createDataTable(table);
     if (data != null) {
       data.cells()
@@ -316,10 +295,31 @@ public class RestAssuredHelper extends RestAssuredConfigProperties {
    *
    * @param table is a list with parameters given on step.
    */
-  public DataTable createDataTable(List<List<String>> table) {
+  public static DataTable createDataTable(List<List<String>> table) {
     DataTable data;
     data = DataTable.create(table);
     log.info(data.toString());
     return data;
+  }
+  public static String retrieveResponse(String key) {
+    String value = "";
+    ArrayList<String> arrayValue = new ArrayList<>();
+    String classType = response.getBody().path(key).getClass().toString();
+    if (response != null && response.getBody() != null) {
+      if (response.getBody().path(key) != null) {
+        if ("class java.util.ArrayList".equals(classType)) {
+          arrayValue = response.getBody().path(key);
+          value = StringUtils.equals(arrayValue.toString(), "[]") ? "" : arrayValue.toString();
+        }else{
+          value = response.getBody().path(key).toString();
+        }
+      } else {
+        throw new SkipException("Selected path didn't exist ");
+      }
+    } else {
+      throw new SkipException("Response is null or empty");
+    }
+
+    return value;
   }
 }

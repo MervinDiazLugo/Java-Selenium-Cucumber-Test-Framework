@@ -6,9 +6,20 @@ Feature: Pets
     Then I print the api Response GET
     And I validate status code is 200
 
-  Scenario: PUT - Change pet data
+
+  Scenario: POST - Create a new Pet
     Given I Save in scenario data following customCat and Fantasy Category
-    Given I do a PUT in /pet using body ./pet2.json
-      | name | Little Pony |
+    Given I do a POST in /pet using body ./Post_Pet.json
+    Then I print the api Response
+    Then I save the response key id as id_petId
+    And I validate status code is 200
+
+
+  Scenario: PUT - Change pet data
+    Given I do a PUT in /pet using body ./Put_Pet.json
+      | name      | Little Pony |
     Then I print the api Response
     And I validate status code is 200
+
+
+

@@ -8,12 +8,20 @@ import io.restassured.response.ResponseOptions;
 import io.restassured.specification.RequestSpecification;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+
 import org.apache.commons.lang3.StringUtils;
 import org.testng.SkipException;
+import org.testng.log4testng.Logger;
 
-public class RestAssuredExtension extends RestAssuredHelper {
+import static config.RestAssuredHelper.getBodyFromResource;
+import static config.RestAssuredHelper.insertParams;
+
+public class RestAssuredExtension extends RestAssuredConfigProperties{
+
   public static RequestSpecBuilder apiBuilder = new RequestSpecBuilder();
   public static RestAssuredConfigProperties apiProperties = new RestAssuredConfigProperties();
+  public static Logger log = Logger.getLogger(RestAssuredExtension.class);
 
   public static String apiVersion;
   public static String apiUri;
@@ -111,9 +119,9 @@ public class RestAssuredExtension extends RestAssuredHelper {
       RequestSpecification requestToken = RestAssured.given().spec(apiBuilder.build());
       response = requestToken.post(new URI(path));
 
-      if (authToken.getStatusCode() != 200) {
+      /*if (authToken.getStatusCode() != 200) {
         throw new SkipException("Authentication failed");
-      }
+      }*/
     } catch (IllegalArgumentException | NullPointerException | URISyntaxException e) {
       throw new SkipException("Authentication failed " + e);
     }
@@ -149,4 +157,6 @@ public class RestAssuredExtension extends RestAssuredHelper {
   public void addParams(String key, String value) {
     apiBuilder.addQueryParam(key, value);
   }
+
+
 }

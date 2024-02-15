@@ -62,7 +62,7 @@ public class RestAssuredConfigProperties {
     API_BODY_DATA = prop.getProperty("api.bodyData");
   }
 
-  public String getApiVersion() {
+  public static String getApiVersion() {
     API_SYSTEM_VERSION = getSystemVersion();
     API_TESTNG_VERSION= getTestNgVersion();
     API_PROPERTIES_VERSION= getPropertiesVersion();
@@ -113,7 +113,7 @@ public class RestAssuredConfigProperties {
     return API_TESTNG_ENVIRONMENT;
   }
 
-  public String getPropertiesVersion() {
+  public static String getPropertiesVersion() {
     return API_PROPERTIES_VERSION;
   }
 
@@ -126,7 +126,7 @@ public class RestAssuredConfigProperties {
     return API_TESTNG_VERSION;
   }
 
-  public String getTestNgVersion() {
+  public static String getTestNgVersion() {
     return API_TESTNG_VERSION;
   }
 
@@ -134,7 +134,7 @@ public class RestAssuredConfigProperties {
     return API_PROPERTIES_ENVIRONMENT;
   }
 
-  public String getSystemVersion() {
+  public static String getSystemVersion() {
     return API_SYSTEM_VERSION;
   }
 
