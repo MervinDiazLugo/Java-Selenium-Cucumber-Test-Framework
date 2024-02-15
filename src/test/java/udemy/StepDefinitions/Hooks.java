@@ -1,4 +1,4 @@
-package udemy.web.StepDefinitions;
+package udemy.StepDefinitions;
 
 import config.ConfigDriver;
 import config.WebBaseConfigProperties;

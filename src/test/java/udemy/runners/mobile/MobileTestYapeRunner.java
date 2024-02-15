@@ -10,7 +10,7 @@ import org.testng.annotations.Parameters;
 @CucumberOptions(
     tags = "@MobileYapeBooking and not @Ignore",
     features = "src/test/resources/udemy/MobileTest/Yape",
-    glue = "udemy.web.StepDefinitions",
+    glue = "udemy.StepDefinitions",
     plugin = {
       "pretty",
       "summary",
@@ -20,9 +20,9 @@ import org.testng.annotations.Parameters;
     })
 public class MobileTestYapeRunner extends AbstractTestNGCucumberTests {
   @BeforeTest
-  @Parameters({"webdriver.env", "webdriver.client"})
+  @Parameters({"mobile.driver.env", "mobile.driver.client"})
   public void beforeSuite(@Optional("null") String environment, @Optional("null") String client) {
-    System.out.println("TestNG mobile.env for this test set is " + environment);
+    System.out.println("TestNG mobile.driver.env for this test set is " + environment);
     System.out.println("TestNG mobile.client for this test set is " + client);
     AndroidDriverProperties.setTestNgEnvironment(environment);
     AndroidDriverProperties.setTestNgClient(client);

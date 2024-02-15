@@ -1,4 +1,4 @@
-package udemy.web.PageObjects;
+package udemy.mobile.PageObjects;
 
 import io.appium.java_client.MobileBy;
 import org.openqa.selenium.By;

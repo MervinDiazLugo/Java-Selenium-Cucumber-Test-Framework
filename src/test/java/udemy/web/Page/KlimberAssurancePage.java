@@ -171,7 +171,7 @@ public class KlimberAssurancePage extends WebDriverHelper {
           && Integer.parseInt(currentValue) < Integer.parseInt(valueToBeSet)) {
         int clicksQuantity = Integer.parseInt(valueToBeSet) - Integer.parseInt(currentValue);
         for (int i = 0; i < clicksQuantity; ++i) {
-          sleep(1);
+          sleep(5);
           addElem.click();
         }
       } else {

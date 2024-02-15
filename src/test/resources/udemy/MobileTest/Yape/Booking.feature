@@ -11,6 +11,7 @@ Feature: Yape Test values
     And User sets following Children values
       | 5 years old |
     Then User click on Search button
-    When User selects option number 1 of result list
+    When User selects option number 0 of result list
+
 
 

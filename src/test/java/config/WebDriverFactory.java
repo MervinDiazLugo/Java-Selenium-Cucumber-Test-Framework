@@ -16,7 +16,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.log4testng.Logger;
 
 public class WebDriverFactory extends WebBaseConfigProperties {
-  /** ***** Log Attribute ******* */
+  /** **** Log Attribute ******* */
   private static Logger log = Logger.getLogger(WebDriverFactory.class);
 
   private static final String ZAP_PROXY_HOST = "localhost";

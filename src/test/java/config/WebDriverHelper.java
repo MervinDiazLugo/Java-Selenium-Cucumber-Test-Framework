@@ -25,7 +25,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.log4testng.Logger;
-import udemy.web.StepDefinitions.Hooks;
+import udemy.StepDefinitions.Hooks;
 
 public class WebDriverHelper extends WebBaseConfigProperties {
   public static WebDriver driver;

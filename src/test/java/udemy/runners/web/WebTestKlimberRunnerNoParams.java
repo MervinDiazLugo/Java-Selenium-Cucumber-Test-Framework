@@ -6,7 +6,7 @@ import io.cucumber.testng.CucumberOptions;
 @CucumberOptions(
     tags = "@UdemyWebTest and not @Ignore",
     features = "src/test/resources/udemy/WebTest/Klimber",
-    glue = "udemy.web.StepDefinitions",
+    glue = "udemy.StepDefinitions",
     plugin = {
       "pretty",
       "html:test-output",

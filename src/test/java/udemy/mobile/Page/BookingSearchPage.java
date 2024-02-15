@@ -1,6 +1,6 @@
-package udemy.web.Page;
+package udemy.mobile.Page;
 
-import static udemy.web.PageObjects.BookingSearchPageObjects.*;
+import static udemy.mobile.PageObjects.BookingSearchPageObjects.*;
 
 import config.WebDriverHelper;
 import io.cucumber.datatable.DataTable;
@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.log4testng.Logger;
-import udemy.web.PageObjects.BookingSearchPageObjects;
+import udemy.mobile.PageObjects.BookingSearchPageObjects;
 
 public class BookingSearchPage extends WebDriverHelper {
   /** ****** Log Attribute ******* */
@@ -49,7 +49,7 @@ public class BookingSearchPage extends WebDriverHelper {
   public void skipSignInScreen() {
     By closeSignScreen = genericAccessibilityIdBuilder("Navigate up");
 
-    if (waitVisibility(closeSignScreen, null)) {
+    if (waitVisibility(closeSignScreen, EXPLICIT_TIMEOUT)) {
       click(closeSignScreen);
     }
     boolean isVisible =
@@ -258,6 +258,7 @@ public class BookingSearchPage extends WebDriverHelper {
   }
 
   public void selectFromResultList(int index) {
+    swipeTo(bookingSearchPageObjects.RESULT_LIST);
     List<WebElement> locationResultList = getElementList(bookingSearchPageObjects.RESULT_LIST);
 
     if (!locationResultList.isEmpty()) {

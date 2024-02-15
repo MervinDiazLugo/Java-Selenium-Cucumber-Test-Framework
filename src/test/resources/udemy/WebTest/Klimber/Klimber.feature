@@ -5,10 +5,10 @@ Feature: An example
     Given I am in app main site
     And I wait for first step elements are loaded
     Then I fill following text boxes:
-      | Nombre    | María Jose Ortiz Rodriguez |
-      | Provincia | CABA                       |
-      | Cód. área | 11                         |
-      | Celular   | 22501118                   |
+      | Nombre    | Patricia Jose Ortiz Palermo |
+      | Provincia | CABA                        |
+      | Cód. área | 11                          |
+      | Celular   | 22500000                    |
     And click on Cotizá button
     And I wait for second step elements are loaded
     Then I fill following text boxes:
@@ -30,5 +30,5 @@ Feature: An example
       | Número                  | 500                         |
       | Piso                    | 2                           |
       | Departamento            | C                           |
-      | Código Postal           | 2300                        |
+      | Código Postal           | 1123                        |
       | Ciudad                  | C.A.B.A                     |
