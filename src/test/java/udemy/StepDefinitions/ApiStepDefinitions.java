@@ -1,18 +1,17 @@
 package udemy.StepDefinitions;
 
+import static config.RestAssuredHelper.*;
+
 import config.RestAssuredExtension;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
-
-import static config.RestAssuredHelper.*;
 
 public class ApiStepDefinitions extends RestAssuredExtension {
 
@@ -45,7 +44,7 @@ public class ApiStepDefinitions extends RestAssuredExtension {
 
   @Then("^I do a GET in (.*?)$")
   public void iDoAGet(String bodyPath) {
-     apiGet(bodyPath);
+    apiGet(bodyPath);
   }
 
   @Then("^I do a DELETE in (.*?)$")
@@ -67,7 +66,6 @@ public class ApiStepDefinitions extends RestAssuredExtension {
     saveInTestData(key, value);
   }
 
-
   @And("^I save the response key (.*?) as (.*?)$")
   public void iSaveTheResponseKeyFilesIdAsFileId(String value, String key) {
     saveInTestData(key, retrieveResponse(value));
@@ -81,7 +79,6 @@ public class ApiStepDefinitions extends RestAssuredExtension {
             "Error message response is %s but expected is %s",
             response.getBody().asPrettyString(), message));
   }
-
 
   @Then("^I Save the response with following values and keys$")
   public void iSaveTheResponseWithFollowingValuesAndKeys(List<List<String>> table) {
@@ -97,8 +94,10 @@ public class ApiStepDefinitions extends RestAssuredExtension {
   public void iAssertEntityValue(String key, String value) {
     String val = insertParams(value);
     String responseValue = retrieveResponse(key);
-    Assert.assertTrue(StringUtils.equals(retrieveResponse(key), val),
-            String.format("Values does not match, response is %s and expected is %s", val, responseValue));
+    Assert.assertTrue(
+        StringUtils.equals(retrieveResponse(key), val),
+        String.format(
+            "Values does not match, response is %s and expected is %s", val, responseValue));
   }
 
   @Given("^I do a PUT in (.*?) using body (.*?)$")

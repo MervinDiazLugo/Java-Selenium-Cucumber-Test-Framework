@@ -1,10 +1,7 @@
 package config;
 
 import io.cucumber.datatable.DataTable;
-import io.restassured.response.Response;
-import io.restassured.response.ResponseOptions;
 import java.io.IOException;
-import java.net.CacheRequest;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
@@ -41,7 +38,7 @@ public class RestAssuredHelper extends RestAssuredExtension {
     data.put("timeCer", addDaysToDate("today", -156));
     data.put("tomorrow", addDaysToDate("today", -365));
     data.put("lastCancel", addDaysToDate("today", -365));
-    //initGlobalTestData(data);
+    // initGlobalTestData(data);
 
     return data;
   }
@@ -241,8 +238,6 @@ public class RestAssuredHelper extends RestAssuredExtension {
     }
   }
 
-
-
   public static void getDataFromTable(List<List<String>> table) {
     DataTable data = createDataTable(table);
     if (data != null) {
@@ -301,6 +296,7 @@ public class RestAssuredHelper extends RestAssuredExtension {
     log.info(data.toString());
     return data;
   }
+
   public static String retrieveResponse(String key) {
     String value = "";
     ArrayList<String> arrayValue = new ArrayList<>();
@@ -310,7 +306,7 @@ public class RestAssuredHelper extends RestAssuredExtension {
         if ("class java.util.ArrayList".equals(classType)) {
           arrayValue = response.getBody().path(key);
           value = StringUtils.equals(arrayValue.toString(), "[]") ? "" : arrayValue.toString();
-        }else{
+        } else {
           value = response.getBody().path(key).toString();
         }
       } else {

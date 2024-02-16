@@ -1,5 +1,7 @@
 package udemy.StepDefinitions;
 
+import static org.slf4j.event.Level.*;
+
 import config.ConfigDriver;
 import config.WebBaseConfigProperties;
 import io.cucumber.java.After;
@@ -13,10 +15,7 @@ import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.*;
-import org.slf4j.event.Level;
 import org.testng.log4testng.Logger;
-
-import static org.slf4j.event.Level.*;
 
 public class Hooks extends AbstractTestNGCucumberTests {
   public static WebDriver driver;

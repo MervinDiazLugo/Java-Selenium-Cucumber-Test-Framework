@@ -1,5 +1,8 @@
 package config;
 
+import static config.RestAssuredHelper.getBodyFromResource;
+import static config.RestAssuredHelper.insertParams;
+
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
@@ -8,16 +11,11 @@ import io.restassured.response.ResponseOptions;
 import io.restassured.specification.RequestSpecification;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-
 import org.apache.commons.lang3.StringUtils;
 import org.testng.SkipException;
 import org.testng.log4testng.Logger;
 
-import static config.RestAssuredHelper.getBodyFromResource;
-import static config.RestAssuredHelper.insertParams;
-
-public class RestAssuredExtension extends RestAssuredConfigProperties{
+public class RestAssuredExtension extends RestAssuredConfigProperties {
 
   public static RequestSpecBuilder apiBuilder = new RequestSpecBuilder();
   public static RestAssuredConfigProperties apiProperties = new RestAssuredConfigProperties();
@@ -42,7 +40,7 @@ public class RestAssuredExtension extends RestAssuredConfigProperties{
       apiBuilder.setContentType(ContentType.JSON);
       apiBuilder.setAccept("*/*");
       if (!isAlreadyAuthenticated) {
-        //authentication();
+        // authentication();
         apiBuilder.addHeader("api_key", "special-key");
       }
 
@@ -75,7 +73,7 @@ public class RestAssuredExtension extends RestAssuredConfigProperties{
     return authToken;
   }
 
-  private static void validateAuth(){
+  private static void validateAuth() {
     if (authToken.getStatusCode() != 200) {
       throw new SkipException("Authentication failed " + authToken.getStatusCode());
     }
@@ -87,7 +85,7 @@ public class RestAssuredExtension extends RestAssuredConfigProperties{
   }
 
   public static String getBearerToken() {
-    return "Bearer "; //+ authToken.getBody().jsonPath().get("token");
+    return "Bearer "; // + authToken.getBody().jsonPath().get("token");
   }
 
   public ResponseOptions<Response> apiGet(String path) {
@@ -96,7 +94,7 @@ public class RestAssuredExtension extends RestAssuredConfigProperties{
       apiBuilder.setBaseUri(apiUri);
       RequestSpecification requestToken = RestAssured.given().spec(apiBuilder.build());
       response = requestToken.get(new URI(path));
-      //validateAuth();
+      // validateAuth();
 
     } catch (IllegalArgumentException | NullPointerException | URISyntaxException e) {
       throw new SkipException("Api Get failed " + e);
@@ -110,7 +108,7 @@ public class RestAssuredExtension extends RestAssuredConfigProperties{
       apiBuilder.setBaseUri(apiUri);
       RequestSpecification requestToken = RestAssured.given().spec(apiBuilder.build());
       response = requestToken.delete(new URI(path));
-      //validateAuth();
+      // validateAuth();
 
     } catch (IllegalArgumentException | NullPointerException | URISyntaxException e) {
       throw new SkipException("Api delete failed " + e);
@@ -134,7 +132,7 @@ public class RestAssuredExtension extends RestAssuredConfigProperties{
       log.info(body);
       RequestSpecification requestToken = RestAssured.given().spec(apiBuilder.build());
       response = requestToken.post(new URI(path));
-      //validateAuth();
+      // validateAuth();
     } catch (IllegalArgumentException | NullPointerException | URISyntaxException e) {
       throw new SkipException("Authentication failed " + e);
     }
@@ -158,7 +156,7 @@ public class RestAssuredExtension extends RestAssuredConfigProperties{
       RequestSpecification requestToken = RestAssured.given().spec(apiBuilder.build());
       response = requestToken.put(new URI(path));
 
-      //validateAuth();
+      // validateAuth();
 
     } catch (IllegalArgumentException | NullPointerException | URISyntaxException e) {
       throw new SkipException("Authentication failed " + e);
@@ -169,6 +167,4 @@ public class RestAssuredExtension extends RestAssuredConfigProperties{
   public void addParams(String key, String value) {
     apiBuilder.addQueryParam(key, value);
   }
-
-
 }
