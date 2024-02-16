@@ -3,7 +3,7 @@ Feature: Pets
 
   Scenario: Get pet By Status available
     Given I do a GET in /pet/findByStatus?status=available
-    Then I print the api Response GET
+    Then I print the api Response
     And I validate status code is 200
 
 
@@ -21,5 +21,14 @@ Feature: Pets
     Then I print the api Response
     And I validate status code is 200
 
+  Scenario: DELETE - Wipe pet data
+    Given I do a DELETE in pet/$id_petId
+    Then I print the api Response
+    And I validate status code is 200
+    And I assert entity message is $id_petId
 
-
+  Scenario: Get deleted pet id
+    Given I do a GET in pet/$id_petId
+    Then I print the api Response
+    And I validate status code is 404
+    And I assert entity message is Pet not found

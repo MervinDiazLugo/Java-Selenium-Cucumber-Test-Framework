@@ -25,7 +25,7 @@ public class RestAssuredExtension extends RestAssuredConfigProperties{
 
   public static String apiVersion;
   public static String apiUri;
-  public static String authEndpoint;
+  public static String authEndpoint = getAuthenticationEndpoint();
   public static String apiPath;
 
   public static boolean isAlreadyAuthenticated;
@@ -36,15 +36,14 @@ public class RestAssuredExtension extends RestAssuredConfigProperties{
   public RestAssuredExtension() {
     apiVersion = getApiVersion();
     apiUri = getBaseUri().concat(apiVersion);
-    // authEndpoint = String.format(apiProperties.getAuthEndPoint(), apiVersion);
-    //testData = setTestData();
+    authEndpoint = getAuthenticationEndpoint();
     try {
       apiBuilder.setBaseUri(apiUri);
       apiBuilder.setContentType(ContentType.JSON);
       apiBuilder.setAccept("*/*");
       if (!isAlreadyAuthenticated) {
         //authentication();
-        //apiBuilder.addHeader("Authorization", getBearerToken());
+        apiBuilder.addHeader("api_key", "special-key");
       }
 
     } catch (IllegalArgumentException e) {
@@ -62,14 +61,12 @@ public class RestAssuredExtension extends RestAssuredConfigProperties{
     setDefaultHeaders();
     try {
       authBuilder.setBaseUri(apiUri);
-      // authBuilder.addQueryParam("username", prop.getUsername());
-      // authBuilder.addQueryParam("password", prop.getPassword());
+      authBuilder.addQueryParam("username", getApiUser());
+      authBuilder.addQueryParam("password", getApiPassword());
       RequestSpecification requestToken = RestAssured.given().spec(authBuilder.build());
       authToken = requestToken.post(new URI(authEndpoint));
 
-      if (authToken.getStatusCode() != 200) {
-        throw new SkipException("Authentication failed " + authToken.getStatusCode());
-      }
+      validateAuth();
 
     } catch (IllegalArgumentException | NullPointerException | URISyntaxException e) {
       throw new SkipException("Authentication failed " + e.getMessage());
@@ -78,26 +75,45 @@ public class RestAssuredExtension extends RestAssuredConfigProperties{
     return authToken;
   }
 
+  private static void validateAuth(){
+    if (authToken.getStatusCode() != 200) {
+      throw new SkipException("Authentication failed " + authToken.getStatusCode());
+    }
+  }
+
   /** put default header to request */
   private static void setDefaultHeaders() {
     apiBuilder.addHeader("Content-Type", "application/json");
   }
 
   public static String getBearerToken() {
-    return "Bearer " + authToken.getBody().jsonPath().get("token");
+    return "Bearer "; //+ authToken.getBody().jsonPath().get("token");
   }
 
   public ResponseOptions<Response> apiGet(String path) {
     path = insertParams(path);
     try {
       apiBuilder.setBaseUri(apiUri);
-      // body
-      // query params
       RequestSpecification requestToken = RestAssured.given().spec(apiBuilder.build());
       response = requestToken.get(new URI(path));
+      //validateAuth();
 
     } catch (IllegalArgumentException | NullPointerException | URISyntaxException e) {
       throw new SkipException("Api Get failed " + e);
+    }
+    return response;
+  }
+
+  public ResponseOptions<Response> apiDelete(String path) {
+    path = insertParams(path);
+    try {
+      apiBuilder.setBaseUri(apiUri);
+      RequestSpecification requestToken = RestAssured.given().spec(apiBuilder.build());
+      response = requestToken.delete(new URI(path));
+      //validateAuth();
+
+    } catch (IllegalArgumentException | NullPointerException | URISyntaxException e) {
+      throw new SkipException("Api delete failed " + e);
     }
     return response;
   }
@@ -118,10 +134,7 @@ public class RestAssuredExtension extends RestAssuredConfigProperties{
       log.info(body);
       RequestSpecification requestToken = RestAssured.given().spec(apiBuilder.build());
       response = requestToken.post(new URI(path));
-
-      /*if (authToken.getStatusCode() != 200) {
-        throw new SkipException("Authentication failed");
-      }*/
+      //validateAuth();
     } catch (IllegalArgumentException | NullPointerException | URISyntaxException e) {
       throw new SkipException("Authentication failed " + e);
     }
@@ -145,9 +158,8 @@ public class RestAssuredExtension extends RestAssuredConfigProperties{
       RequestSpecification requestToken = RestAssured.given().spec(apiBuilder.build());
       response = requestToken.put(new URI(path));
 
-/*      if (authToken.getStatusCode() != 200) {
-        throw new SkipException("Authentication failed");
-      }*/
+      //validateAuth();
+
     } catch (IllegalArgumentException | NullPointerException | URISyntaxException e) {
       throw new SkipException("Authentication failed " + e);
     }

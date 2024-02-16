@@ -32,6 +32,10 @@ public class ApiStepDefinitions extends RestAssuredExtension {
   @Given("^I print the api Response$")
   public void iDoAPrint() {
     response.getBody().prettyPrint();
+    long responseTime1 = response.getTime();
+    System.out.println("Response time in milliseconds:" + responseTime1);
+    long responseTimeInSeconds = response.getTimeIn(TimeUnit.SECONDS);
+    System.out.println("Response time in seconds:" + responseTimeInSeconds);
   }
 
   @And("^I save the response key (.*?) on test data$")
@@ -44,13 +48,9 @@ public class ApiStepDefinitions extends RestAssuredExtension {
      apiGet(bodyPath);
   }
 
-  @And("^I print the api Response GET$")
-  public void iPrintTheApiResponseGET() {
-    response.getBody().prettyPrint();
-    long responseTime1 = response.getTime();
-    System.out.println("Response time in milliseconds:" + responseTime1);
-    long responseTimeInSeconds = response.getTimeIn(TimeUnit.SECONDS);
-    System.out.println("Response time in seconds:" + responseTimeInSeconds);
+  @Then("^I do a DELETE in (.*?)$")
+  public void iDoDelete(String bodyPath) {
+    apiDelete(bodyPath);
   }
 
   @And("^I validate status code is (.*?)$")
@@ -91,6 +91,14 @@ public class ApiStepDefinitions extends RestAssuredExtension {
   @And("^I assert following (.*?) is empty$")
   public void iAssertFollowingFileIsEmpty(String key) {
     Assert.assertTrue(StringUtils.isEmpty(retrieveResponse(key)), "Files is not empty");
+  }
+
+  @And("^I assert entity (.*?) is (.*?)$")
+  public void iAssertEntityValue(String key, String value) {
+    String val = insertParams(value);
+    String responseValue = retrieveResponse(key);
+    Assert.assertTrue(StringUtils.equals(retrieveResponse(key), val),
+            String.format("Values does not match, response is %s and expected is %s", val, responseValue));
   }
 
   @Given("^I do a PUT in (.*?) using body (.*?)$")
