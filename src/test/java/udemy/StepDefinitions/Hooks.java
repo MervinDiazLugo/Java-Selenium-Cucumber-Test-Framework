@@ -1,7 +1,5 @@
 package udemy.StepDefinitions;
 
-import static org.slf4j.event.Level.*;
-
 import config.ConfigDriver;
 import config.WebBaseConfigProperties;
 import io.cucumber.java.After;
