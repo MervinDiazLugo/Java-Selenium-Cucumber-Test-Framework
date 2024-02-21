@@ -16,12 +16,13 @@ public class BrowserTest {
 
     @Test
     public void test(){
+        driver.get("https://www.james-willett.com/gatling-load-testing-complete-guide/");
         driver.getTitle();
     }
 
     @AfterTest
     public void tearDown(){
-
+        driver.quit();
     }
 
 }
