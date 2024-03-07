@@ -13,7 +13,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <selenium.version>3.141.59</selenium.version>
-        <maven.cucumber.reporting.version>5.7.6</maven.cucumber.reporting.version>
+        <maven.cucumber.reporting.version>5.7.8</maven.cucumber.reporting.version>
         <defaultSuiteFiles>WebUdemyCucumberTestRunner.xml,</defaultSuiteFiles>
         <client>client1</client>
         <suiteFile>${defaultSuiteFiles}</suiteFile>

@@ -1,7 +1,7 @@
 package udemy.StepDefinitions;
 
+import static config.WebBaseConfigProperties.getCurrentPath;
 import config.ConfigDriver;
-import config.WebBaseConfigProperties;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
@@ -26,66 +26,82 @@ public class Hooks extends AbstractTestNGCucumberTests {
   @Before("@WebTesting")
   public void initWebDriver(Scenario scenario) throws Exception {
     log.info(
-        "***********************************************************************************************************");
+        "*****************************************************************************************************");
     log.info("[ Configuration ] - Initializing driver configuration");
     log.info(
-        "***********************************************************************************************************");
+        "*****************************************************************************************************");
     driver = ConfigDriver.initWebConfig();
     mainWindowsHandle.put("main", driver.getWindowHandle());
     this.scenario = scenario;
     log.info(
-        "***********************************************************************************************************");
+        "*****************************************************************************************************");
     log.info("[ Scenario ] - " + scenario.getName());
     log.info(
-        "***********************************************************************************************************");
+        "*****************************************************************************************************");
   }
 
   @Before("@MobileTesting")
   public void initMobileDriver(Scenario scenario) throws Exception {
     log.info(
-        "***********************************************************************************************************");
+        "*****************************************************************************************************");
     log.info("[ Configuration ] - Initializing driver configuration");
     log.info(
-        "***********************************************************************************************************");
+        "*****************************************************************************************************");
     driver = ConfigDriver.initMobileConfig();
     this.scenario = scenario;
     log.info(
-        "***********************************************************************************************************");
+        "*****************************************************************************************************");
     log.info("[ Scenario ] - " + scenario.getName());
     log.info(
-        "***********************************************************************************************************");
+        "*****************************************************************************************************");
+  }
+
+  private void takeScreenShot(Scenario scenario) {
+    try {
+      scenario.log("Scenario failed.");
+      byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+      scenario.attach(
+          screenshot, "image/png", scenario.getId() + "_" + scenario.getName().replace(" ", "_"));
+      File destFile =
+          new File(
+              getCurrentPath()
+                  + "/src/test/resources/screenshots/"
+                  + scenario.getId()
+                  + scenario.getName()
+                  + ".jpg");
+      FileUtils.copyFile(((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE), destFile);
+    } catch (WebDriverException | IOException somePlatformsDontSupportScreenshots) {
+      System.err.println(somePlatformsDontSupportScreenshots.getMessage());
+    }
+  }
+
+  @After("@MobileTesting")
+  /** Embed a screenshot in test report if test is marked as failed */
+  public void embedMobileScreenshot(Scenario scenario) {
+    if (scenario.isFailed()) {
+      takeScreenShot(scenario);
+    }
+
+    log.info(
+        "*****************************************************************************************************");
+    log.info("[ MobileDriver Status ] - Clean and close the instance of the driver");
+    log.info(
+        "*****************************************************************************************************");
+    driver.quit();
   }
 
   @After("@WebTesting")
   /** Embed a screenshot in test report if test is marked as failed */
-  public void embedScreenshot(Scenario scenario) throws IOException {
-
+  public void embedScreenshot(Scenario scenario) {
     if (scenario.isFailed()) {
-      try {
-        scenario.log("The scenario failed.");
-        byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        scenario.attach(
-            screenshot,
-            "JPG",
-            WebBaseConfigProperties.getCurrentPath() + "/src/test/resources/screenshots/");
-        File destFile =
-            new File(
-                WebBaseConfigProperties.getCurrentPath()
-                    + "/src/test/resources/screenshots/"
-                    + scenario.getId()
-                    + scenario.getName()
-                    + ".jpg");
-        FileUtils.copyFile(((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE), destFile);
-      } catch (WebDriverException somePlatformsDontSupportScreenshots) {
-        System.err.println(somePlatformsDontSupportScreenshots.getMessage());
-      }
+      takeScreenShot(scenario);
     }
 
     log.info(
-        "***********************************************************************************************************");
-    log.info("[ Driver Status ] - Clean and close the instance of the driver");
+        "*****************************************************************************************************");
+    log.info("[ WebDriver Status ] - Clean and close the instance of the driver");
     log.info(
-        "***********************************************************************************************************");
+        "*****************************************************************************************************");
     driver.quit();
   }
 
