@@ -23,3 +23,5 @@ Framework para pruebas con Selenium/Cucumber Codigo Java y Maven (Udemy 2024)
 ### Para correr pruebas Api
 
 **`mvn clean test -DsuiteFile='ApiTestPetStoreRunnerNoParams.xml'`**
+
+### [Tools que necesito para instalar y configurar este framework:](https://medium.com/@waynemervin/como-configurar-tu-entorno-para-empezar-a-programar-en-java-a64337863d98)
