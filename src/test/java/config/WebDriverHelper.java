@@ -21,9 +21,7 @@ import org.json.simple.JSONObject;
 import org.openqa.selenium.*;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.*;
 import org.testng.log4testng.Logger;
 import udemy.StepDefinitions.Hooks;
 
@@ -165,7 +163,7 @@ public class WebDriverHelper extends WebBaseConfigProperties {
    * @param locator text used as reference
    */
   public void webClick(By locator) {
-    explicitWait(locator);
+    fluentWaitVisibility(locator);
     driver.findElement(locator).click();
   }
 
@@ -297,6 +295,22 @@ public class WebDriverHelper extends WebBaseConfigProperties {
       WebDriverWait wait = new WebDriverWait(driver, time);
       wait.until(ExpectedConditions.visibilityOfElementLocated(by));
       // wait.until(ExpectedConditions.elementToBeClickable(by));
+      return true;
+    } catch (NoSuchElementException | TimeoutException e) {
+      log.info("Element is not present");
+      return false;
+    }
+  }
+
+
+  public boolean fluentWaitVisibility(By by) {
+    try {
+      Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+              .withTimeout(30, TimeUnit.SECONDS)
+              .pollingEvery(5, TimeUnit.SECONDS)
+              .ignoring(NoSuchElementException.class);
+
+      wait.until(ExpectedConditions.visibilityOfElementLocated(by));
       return true;
     } catch (NoSuchElementException | TimeoutException e) {
       log.info("Element is not present");
@@ -542,7 +556,7 @@ public class WebDriverHelper extends WebBaseConfigProperties {
    * @param text text used as reference
    */
   public void click(String text) {
-    explicitWait(genericByBuilder(text));
+    fluentWaitVisibility(genericByBuilder(text));
     driver.findElement(genericByBuilder(text)).click();
   }
 
