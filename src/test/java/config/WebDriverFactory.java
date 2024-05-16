@@ -5,6 +5,8 @@ import io.appium.java_client.MobileElement;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.SessionNotCreatedException;
 import org.openqa.selenium.WebDriver;
@@ -49,25 +51,29 @@ public class WebDriverFactory extends WebBaseConfigProperties {
       WebDriverManager.chromedriver().clearResolutionCache().forceDownload().setup();
       Map<String, Object> prefs = new HashMap<String, Object>();
       ChromeOptions options = new ChromeOptions();
-      prefs.put(
-          "download.default_directory", getCurrentPath() + "\\src\\test\\resources\\downloads");
+      prefs.put("download.default_directory", getCurrentPath() + "\\src\\test\\resources\\downloads");
       prefs.put("download.prompt_for_download", false);
       options.setExperimentalOption("prefs", prefs);
       driver = new ChromeDriver(options);
 
     } else if ("CHROME_LOCAL".equalsIgnoreCase(platform)) {
-      System.setProperty(
-          "webdriver.chrome.driver",
-          getCurrentPath() + "\\src\\test\\resources\\bin\\windows32\\chromedriver.exe");
+      System.setProperty("webdriver.chrome.driver",
+              getCurrentPath() + "\\src\\test\\resources\\bin\\windows32\\chromedriver.exe");
       Map<String, Object> prefs = new HashMap<String, Object>();
       ChromeOptions options = new ChromeOptions();
-      prefs.put(
-          "download.default_directory", getCurrentPath() + "\\src\\test\\resources\\downloads");
+      prefs.put("download.default_directory", getCurrentPath() + "\\src\\test\\resources\\downloads");
       prefs.put("download.prompt_for_download", false);
       options.setExperimentalOption("prefs", prefs);
       options.addArguments("--no-sandbox", "--disable-dev-shm-usage");
       driver = new ChromeDriver(options);
-    } else if ("ZAP".equalsIgnoreCase(platform)) {
+    } else if(StringUtils.equalsIgnoreCase(platform, "CHROME_LOCAL_BINARIES")){
+      System.out.println("Creating chrome binaries local session...");
+      ChromeOptions options = new ChromeOptions();
+      options.setBinary(getCurrentPath() + "\\src\\test\\resources\\bin\\chrome-win64");
+      System.setProperty("webdriver.chrome.driver",
+              getCurrentPath() + "\\src\\test\\resources\\bin\\windows32\\chromedriver.exe");
+      driver = new ChromeDriver();
+    }else if ("ZAP".equalsIgnoreCase(platform)) {
       DesiredCapabilities capabilities = DesiredCapabilities.chrome();
       capabilities.setCapability("proxy", zapProxy);
       capabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
