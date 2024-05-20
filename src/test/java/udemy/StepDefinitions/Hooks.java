@@ -1,6 +1,6 @@
 package udemy.StepDefinitions;
 
-import static config.WebBaseConfigProperties.getCurrentPath;
+import static config.WebDriverConfigProperties.getCurrentPath;
 import config.ConfigDriver;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;

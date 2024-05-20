@@ -7,7 +7,7 @@ import java.util.Properties;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
 
-public class WebBaseConfigProperties {
+public class WebDriverConfigProperties {
   private static Properties prop = new Properties();
   private static final String GLOBAL_DATA_FILE_LOCATION = "/test.properties";
 
@@ -22,7 +22,7 @@ public class WebBaseConfigProperties {
       TESTNG_CLIENT,
       CLIENT;
 
-  public WebBaseConfigProperties() {
+  public WebDriverConfigProperties() {
     initConfig();
   }
 

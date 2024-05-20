@@ -17,7 +17,7 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.log4testng.Logger;
 
-public class WebDriverFactory extends WebBaseConfigProperties {
+public class WebDriverFactory extends WebDriverConfigProperties {
   /** **** Log Attribute ******* */
   private static Logger log = Logger.getLogger(WebDriverFactory.class);
 

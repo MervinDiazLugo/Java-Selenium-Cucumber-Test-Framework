@@ -5,7 +5,7 @@ import org.testng.log4testng.Logger;
 
 public class ConfigDriver {
   /** ***** Load Properties ******* */
-  private static WebBaseConfigProperties baseConfigProperties = new WebBaseConfigProperties();
+  private static WebDriverConfigProperties baseConfigProperties = new WebDriverConfigProperties();
 
   private static AndroidDriverProperties androidConfigProperties = new AndroidDriverProperties();
 

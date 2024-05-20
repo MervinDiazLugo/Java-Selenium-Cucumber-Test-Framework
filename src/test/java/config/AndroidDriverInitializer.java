@@ -1,6 +1,6 @@
 package config;
 
-import static config.WebBaseConfigProperties.getCurrentPath;
+import static config.WebDriverConfigProperties.getCurrentPath;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
