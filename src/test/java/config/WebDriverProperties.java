@@ -7,7 +7,7 @@ import java.util.Properties;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
 
-public class WebDriverConfigProperties {
+public class WebDriverProperties {
   private static Properties prop = new Properties();
   private static final String GLOBAL_DATA_FILE_LOCATION = "/test.properties";
 
@@ -22,14 +22,14 @@ public class WebDriverConfigProperties {
       TESTNG_CLIENT,
       CLIENT;
 
-  public WebDriverConfigProperties() {
+  public WebDriverProperties() {
     initConfig();
   }
 
   public void initConfig() {
     try {
       InputStream input;
-      input = ConfigDriver.class.getResourceAsStream(GLOBAL_DATA_FILE_LOCATION);
+      input = WebDriverProperties.class.getResourceAsStream(GLOBAL_DATA_FILE_LOCATION);
       prop.load(input);
     } catch (IOException e) {
       e.printStackTrace();

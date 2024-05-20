@@ -1,6 +1,6 @@
 package udemy.runners.web;
 
-import config.WebDriverConfigProperties;
+import config.WebDriverProperties;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 import org.testng.annotations.BeforeTest;
@@ -24,7 +24,7 @@ public class WebTestKlimberRunner extends AbstractTestNGCucumberTests {
   public void beforeSuite(@Optional("null") String environment, @Optional("null") String client) {
     System.out.println("TestNG webdriver.env for this test set is " + environment);
     System.out.println("TestNG webdriver.client for this test set is " + client);
-    WebDriverConfigProperties.setTestNgEnvironment(environment);
-    WebDriverConfigProperties.setTestNgClient(client);
+    WebDriverProperties.setTestNgEnvironment(environment);
+    WebDriverProperties.setTestNgClient(client);
   }
 }

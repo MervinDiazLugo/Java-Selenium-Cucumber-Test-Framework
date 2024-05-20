@@ -27,7 +27,7 @@ import org.testng.SkipException;
 import org.testng.log4testng.Logger;
 import udemy.StepDefinitions.Hooks;
 
-public class WebDriverHelper extends WebDriverConfigProperties {
+public class WebDriverHelper extends WebDriverProperties {
   public static WebDriver driver;
 
   private static Logger log = Logger.getLogger(WebDriverHelper.class);
