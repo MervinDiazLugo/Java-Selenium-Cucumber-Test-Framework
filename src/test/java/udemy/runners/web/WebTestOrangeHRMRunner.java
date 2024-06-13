@@ -2,12 +2,11 @@ package udemy.runners.web;
 
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
-import lombok.extern.java.Log;
+import org.testng.annotations.DataProvider;
 
-@Log
 @CucumberOptions(
-    tags = "@UdemyWebTest and not @Ignore",
-    features = "src/test/resources/udemy/WebTest/Klimber",
+    tags = "@Orange and not @Ignore",
+    features = "src/test/resources/udemy/WebTest/Orange",
     glue = "udemy.StepDefinitions",
     plugin = {
       "pretty",
@@ -15,4 +14,10 @@ import lombok.extern.java.Log;
       "json:target/cucumber/cucumber.json",
       "html:target/cucumber-html-report.html"
     })
-public class WebTestKlimberRunnerNoParams extends AbstractTestNGCucumberTests {}
+public class WebTestOrangeHRMRunner extends AbstractTestNGCucumberTests {
+  @Override
+  @DataProvider(parallel = true)
+  public Object[][] scenarios() {
+    return super.scenarios();
+  }
+}

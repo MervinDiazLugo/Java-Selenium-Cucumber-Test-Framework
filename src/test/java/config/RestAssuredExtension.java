@@ -11,15 +11,15 @@ import io.restassured.response.ResponseOptions;
 import io.restassured.specification.RequestSpecification;
 import java.net.URI;
 import java.net.URISyntaxException;
+
+import lombok.extern.java.Log;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.SkipException;
-import org.testng.log4testng.Logger;
 
+@Log
 public class RestAssuredExtension extends RestAssuredConfigProperties {
-
   public static RequestSpecBuilder apiBuilder = new RequestSpecBuilder();
   public static RestAssuredConfigProperties apiProperties = new RestAssuredConfigProperties();
-  public static Logger log = Logger.getLogger(RestAssuredExtension.class);
 
   public static String apiVersion;
   public static String apiUri;

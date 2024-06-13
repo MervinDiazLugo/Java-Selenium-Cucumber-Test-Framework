@@ -6,19 +6,17 @@ import config.WebDriverHelper;
 import io.cucumber.datatable.DataTable;
 import java.util.Collections;
 import java.util.List;
+
+import lombok.extern.java.Log;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
 import org.testng.log4testng.Logger;
-import udemy.web.PageObjects.KlimberAssurancePageObjects;
-
+@Log
 public class KlimberAssurancePage extends WebDriverHelper {
-  /** ****** Log Attribute ******* */
-  private static Logger log = Logger.getLogger(KlimberAssurancePage.class);
 
-  KlimberAssurancePageObjects klimberAssurancePageObjects = new KlimberAssurancePageObjects();
   private static final int EXPLICIT_TIMEOUT = 20;
 
   public void waitForFirstStepElements() {

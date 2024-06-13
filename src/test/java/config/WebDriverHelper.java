@@ -61,15 +61,17 @@ public class WebDriverHelper extends WebDriverProperties {
 
   public void waitPageCompletelyLoaded() {
     String GetActual = driver.getCurrentUrl();
-    System.out.println(String.format("Checking if %s page is loaded.", GetActual));
-    Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+    log.info(String.format("Checking if %s page is loaded.", GetActual));
+    Wait<WebDriver> wait =
+        new FluentWait<WebDriver>(driver)
             .withTimeout(Duration.ofSeconds(EXPLICIT_TIMEOUT))
             .pollingEvery(Duration.ofSeconds(3))
             .ignoring(NoSuchElementException.class);
-    wait.until(webDriver -> ((JavascriptExecutor) webDriver)
-            .executeScript("return document.readyState")
-            .equals("complete"));
-
+    wait.until(
+        webDriver ->
+            ((JavascriptExecutor) webDriver)
+                .executeScript("return document.readyState")
+                .equals("complete"));
   }
 
   public String addDaysToDate(String startDate, int daysToAdd) {
@@ -138,16 +140,12 @@ public class WebDriverHelper extends WebDriverProperties {
     return isBeforeThan;
   }
 
-  public WebElement getElement(By loc){
-    return isWebElementDisplayed(loc)
-            ? driver.findElement(loc)
-            : null;
+  public WebElement getElement(By loc) {
+    return isWebElementDisplayed(loc) ? driver.findElement(loc) : null;
   }
 
-  public List<WebElement> getElements(By loc){
-    return isWebElementDisplayed(loc)
-            ? driver.findElements(loc)
-            : null;
+  public List<WebElement> getElements(By loc) {
+    return isWebElementDisplayed(loc) ? driver.findElements(loc) : null;
   }
 
   public void waitForElementVisible(By element) {
@@ -178,11 +176,11 @@ public class WebDriverHelper extends WebDriverProperties {
    * @param locator text used as reference
    */
   public void webClick(By locator) {
-    WebElement elem =  getElement(locator);
-    if(elem != null){
+    WebElement elem = getElement(locator);
+    if (elem != null) {
       elem.click();
       log.info(locator + " clicked");
-    }else{
+    } else {
       throw new SkipException("Locator was not present " + locator);
     }
   }
@@ -193,11 +191,11 @@ public class WebDriverHelper extends WebDriverProperties {
    * @param locator text used as reference
    */
   public void webSendKeys(By locator, String value) {
-    WebElement elem =  getElement(locator);
-    if(elem != null){
+    WebElement elem = getElement(locator);
+    if (elem != null) {
       elem.click();
       log.info(locator + " receive the value " + value);
-    }else{
+    } else {
       throw new SkipException("Locator was not present " + locator);
     }
   }
@@ -209,11 +207,11 @@ public class WebDriverHelper extends WebDriverProperties {
    */
   public void webJsSendKeys(By locator, String value) {
     JavascriptExecutor jse = (JavascriptExecutor) driver;
-    WebElement elem =  driver.findElement(locator) != null ? driver.findElement(locator): null;
-    if(elem != null){
+    WebElement elem = driver.findElement(locator) != null ? driver.findElement(locator) : null;
+    if (elem != null) {
       jse.executeScript(String.format("arguments[0].value='%s';", value), elem);
       log.info(locator + " value set by Js " + value);
-    }else{
+    } else {
       throw new SkipException("Locator was not present " + locator);
     }
   }
@@ -241,11 +239,11 @@ public class WebDriverHelper extends WebDriverProperties {
    */
   public String getAttribute(By locator, String attribute) {
     String value = "";
-    WebElement elem =  driver.findElement(locator) != null ? driver.findElement(locator): null;
-    if(elem != null){
+    WebElement elem = driver.findElement(locator) != null ? driver.findElement(locator) : null;
+    if (elem != null) {
       value = elem.getAttribute(attribute);
       log.info(locator + " return the value " + value);
-    }else{
+    } else {
       throw new SkipException("Locator was not present " + locator);
     }
     return value;
@@ -264,36 +262,36 @@ public class WebDriverHelper extends WebDriverProperties {
 
   public void selectOptionDropdownByIndex(By locator, int option) {
     log.info(String.format("Waiting Element: %s", locator));
-    WebElement elem =  getElement(locator);
-    if(elem != null){
+    WebElement elem = getElement(locator);
+    if (elem != null) {
       Select opt = new Select(elem);
       log.info("Select option: " + option + " by index");
       opt.selectByIndex(option);
-    }else{
+    } else {
       throw new SkipException("Locator was not present " + locator);
     }
   }
 
   public void selectOptionDropdownByText(By locator, String option) {
     log.info(String.format("Waiting Element: %s", locator));
-    WebElement elem =  getElement(locator);
-    if(elem != null){
+    WebElement elem = getElement(locator);
+    if (elem != null) {
       Select opt = new Select(elem);
       log.info("Select option: " + option + " by text");
       opt.selectByVisibleText(option);
-    }else{
+    } else {
       throw new SkipException("Locator was not present " + locator);
     }
   }
 
   public void selectOptionDropdownByValue(By locator, String option) {
     log.info(String.format("Waiting Element: %s", locator));
-    WebElement elem =  getElement(locator);
-    if(elem != null){
+    WebElement elem = getElement(locator);
+    if (elem != null) {
       Select opt = new Select(elem);
       log.info("Select option: " + option + " by value");
       opt.selectByValue(option);
-    }else{
+    } else {
       throw new SkipException("Locator was not present " + locator);
     }
   }
@@ -340,10 +338,10 @@ public class WebDriverHelper extends WebDriverProperties {
     }
   }
 
-
   public boolean fluentWaitVisibility(By by) {
     try {
-      Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+      Wait<WebDriver> wait =
+          new FluentWait<WebDriver>(driver)
               .withTimeout(30, TimeUnit.SECONDS)
               .pollingEvery(5, TimeUnit.SECONDS)
               .ignoring(NoSuchElementException.class);
@@ -374,13 +372,13 @@ public class WebDriverHelper extends WebDriverProperties {
   }
 
   public WebElement getElementFromGenericBuilders(String label) {
-    WebElement elem =  getElement(genericByBuilder(label));
-    if(elem != null){
+    WebElement elem = getElement(genericByBuilder(label));
+    if (elem != null) {
       label = label.split("(?<=[,.])|(?=[,.])|\n|®|:")[0].trim();
       if (driver.findElement(genericByBuilder(label)) != null) {
         elem = driver.findElement(genericByBuilder(label));
       }
-    }else{
+    } else {
       throw new SkipException("Locator was not present " + label);
     }
 
@@ -416,7 +414,7 @@ public class WebDriverHelper extends WebDriverProperties {
   public void scrollToElement(By locator) {
     JavascriptExecutor jse = (JavascriptExecutor) driver;
     log.info("Scrolling to element: " + locator.toString());
-    WebElement elem = driver.findElement(locator) != null ? driver.findElement(locator): null;
+    WebElement elem = driver.findElement(locator) != null ? driver.findElement(locator) : null;
     if (elem != null) {
       jse.executeScript("arguments[0].scrollIntoView();", getElement(locator));
     }
@@ -540,11 +538,11 @@ public class WebDriverHelper extends WebDriverProperties {
 
   public void fillField(By locator, String text) {
     MobileElement element = (MobileElement) getElement(locator);
-    if(element!=null){
+    if (element != null) {
       element.click();
       implicitWait(1);
       element.sendKeys(text);
-    }else{
+    } else {
       throw new SkipException("Locator was not present " + locator);
     }
   }
@@ -556,9 +554,9 @@ public class WebDriverHelper extends WebDriverProperties {
    */
   public void mobileClick(By locator) {
     MobileElement element = (MobileElement) getElement(locator);
-    if(element!=null){
+    if (element != null) {
       element.click();
-    }else{
+    } else {
       throw new SkipException("Locator was not present " + locator);
     }
   }
@@ -593,9 +591,9 @@ public class WebDriverHelper extends WebDriverProperties {
    */
   public void jsClick(WebElement element) {
     JavascriptExecutor executor = (JavascriptExecutor) driver;
-    if(element!=null){
+    if (element != null) {
       executor.executeScript("arguments[0].click();", element);
-    }else{
+    } else {
       throw new SkipException("Locator was not present");
     }
   }
@@ -607,13 +605,13 @@ public class WebDriverHelper extends WebDriverProperties {
    */
   public void jsClick(By locator) {
     JavascriptExecutor executor = (JavascriptExecutor) driver;
-    WebElement element = driver.findElement(locator) != null ? driver.findElement(locator): null;;
-    if(element!=null){
+    WebElement element = driver.findElement(locator) != null ? driver.findElement(locator) : null;
+    ;
+    if (element != null) {
       executor.executeScript("arguments[0].click();", locator);
-    }else{
+    } else {
       throw new SkipException("Locator was not present " + locator);
     }
-
   }
 
   /**
@@ -643,7 +641,7 @@ public class WebDriverHelper extends WebDriverProperties {
     JavascriptExecutor executor = (JavascriptExecutor) driver;
     if (element != null) {
       executor.executeScript(
-              String.format("arguments[0].setAttribute('%s', '%s');", key, value), element);
+          String.format("arguments[0].setAttribute('%s', '%s');", key, value), element);
     } else {
       throw new SkipException("setAttribute: Locator was not present ");
     }
@@ -661,11 +659,10 @@ public class WebDriverHelper extends WebDriverProperties {
     WebElement elm = getElement(locator);
     if (elm != null) {
       executor.executeScript(
-              String.format("arguments[0].setAttribute('%s', '%s');", key, value), elm);
+          String.format("arguments[0].setAttribute('%s', '%s');", key, value), elm);
     } else {
       throw new SkipException("Locator was not present " + locator);
     }
-
   }
 
   /**

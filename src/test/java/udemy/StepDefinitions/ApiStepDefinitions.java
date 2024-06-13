@@ -10,9 +10,11 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import lombok.extern.java.Log;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
-
+@Log
 public class ApiStepDefinitions extends RestAssuredExtension {
 
   public ApiStepDefinitions() {}
@@ -32,9 +34,9 @@ public class ApiStepDefinitions extends RestAssuredExtension {
   public void iDoAPrint() {
     response.getBody().prettyPrint();
     long responseTime1 = response.getTime();
-    System.out.println("Response time in milliseconds:" + responseTime1);
+    log.info("Response time in milliseconds:" + responseTime1);
     long responseTimeInSeconds = response.getTimeIn(TimeUnit.SECONDS);
-    System.out.println("Response time in seconds:" + responseTimeInSeconds);
+    log.info("Response time in seconds:" + responseTimeInSeconds);
   }
 
   @And("^I save the response key (.*?) on test data$")

@@ -3,12 +3,14 @@ package config;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
+import lombok.extern.java.Log;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.testng.SkipException;
-
+@Log
 public class CredentialsConfig {
 
   public JSONObject getUserData() {
