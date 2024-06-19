@@ -16,6 +16,8 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+
+import lombok.extern.java.Log;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONObject;
@@ -24,13 +26,12 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 import org.testng.SkipException;
-import org.testng.log4testng.Logger;
-import udemy.StepDefinitions.Hooks;
 
+import udemy.StepDefinitions.Hooks;
+@Log
 public class WebDriverHelper extends WebDriverProperties {
   public static WebDriver driver;
 
-  private static Logger log = Logger.getLogger(WebDriverHelper.class);
   public static JSONObject scenarioData = new JSONObject();
   public static Map<String, String> mainWindowsHandle = new HashMap<>();
   private static final int EXPLICIT_TIMEOUT = 20;
@@ -578,10 +579,16 @@ public class WebDriverHelper extends WebDriverProperties {
   /**
    * click using generic xpath
    *
-   * @param text text used as reference
+   * @param value text used as reference
    */
-  public void click(String text) {
-    getElement(genericByBuilder(text)).click();
+  public void click(By locator, String value) {
+    WebElement elem = getElement(locator);
+    if (elem != null) {
+      elem.click();
+      log.info(locator + " receive the value " + value);
+    } else {
+      throw new SkipException("Locator was not present " + locator);
+    }
   }
 
   /**
@@ -625,10 +632,10 @@ public class WebDriverHelper extends WebDriverProperties {
       if (elm != null) {
         new Actions(driver).moveToElement(elm).click().perform();
       } else {
-        log.debug("ActionClick WebElement is null");
+        log.info("ActionClick WebElement is null");
       }
     } else {
-      log.debug(element + " is not visible");
+      log.info(element + " is not visible");
     }
   }
 
@@ -683,7 +690,7 @@ public class WebDriverHelper extends WebDriverProperties {
     try {
       driver.manage().timeouts().implicitlyWait(seconds, TimeUnit.SECONDS);
     } catch (Exception e) {
-      log.debug("Error in implicitlyWait  ", e);
+      log.info("Error in implicitlyWait  " + e);
     }
   }
 
