@@ -2,6 +2,7 @@ package udemy.StepDefinitions;
 
 import config.WebDriverHelper;
 import io.cucumber.java.en.*;
+import java.io.IOException;
 import java.util.List;
 import lombok.extern.java.Log;
 import org.openqa.selenium.WebDriver;
@@ -110,5 +111,10 @@ public class StepDefinitions extends WebDriverHelper {
   @When("^the Admin user is Logged in$")
   public void theAdminUserIsLoggedIn() {
     orangeHRMPage.loginAdminUser();
+  }
+
+  @Then("I take an Screenshot")
+  public void iTakeAnScreenshot() throws IOException {
+    takeScreenShot(Hooks.scenario);
   }
 }

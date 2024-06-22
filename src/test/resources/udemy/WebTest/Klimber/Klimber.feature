@@ -9,6 +9,7 @@ Feature: An example
       | Provincia | CABA                        |
       | Cód. área | 11                          |
       | Celular   | 22500000                    |
+    Then I take an Screenshot
     And click on Cotizá button
     And I wait for second step elements are loaded
     Then I fill following text boxes:

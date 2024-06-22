@@ -825,9 +825,24 @@ public class WebDriverHelper extends WebDriverProperties {
   public void takeScreenShot() throws IOException {
     log.info("Saving screen shot");
     File destFile =
-        new File(
-            getCurrentPath() + "/src/test/resources/screenshots/" + UUID.randomUUID() + ".png");
+        new File(getCurrentPath() + "/target/screenshots/" + UUID.randomUUID() + ".jpg");
     FileUtils.copyFile(((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE), destFile);
+  }
+
+  public void takeScreenShot(Scenario scenario) throws IOException {
+    log.info("Saving screenshot");
+    byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+    File destFile =
+        new File(
+            getCurrentPath()
+                + "/target/screenshots/"
+                + scenario.getName()
+                + scenario.getId()
+                + ".jpg");
+
+    FileUtils.copyFile(((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE), destFile);
+    scenario.attach(
+        screenshot, "image/jpg", scenario.getId() + "_" + scenario.getName().replace(" ", "_"));
   }
 
   private int getMod(int t) {

@@ -21,7 +21,7 @@ public class Hooks extends AbstractTestNGCucumberTests {
 
   public static WebDriver driver;
   public static Map<String, String> mainWindowsHandle = new HashMap<>();
-  Scenario scenario = null;
+  public static Scenario scenario = null;
 
   public static JSONObject testData = new JSONObject();
 
@@ -63,7 +63,9 @@ public class Hooks extends AbstractTestNGCucumberTests {
       scenario.log("Scenario failed.");
       byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
       scenario.attach(
-          screenshot, "image/png", scenario.getId() + "_" + scenario.getName().replace(" ", "_"));
+          screenshot,
+          "image/jpg",
+          scenario.getId() + "_" + scenario.getName().replace(" ", "_") + ".jpg");
       File destFile =
           new File(
               getCurrentPath()
