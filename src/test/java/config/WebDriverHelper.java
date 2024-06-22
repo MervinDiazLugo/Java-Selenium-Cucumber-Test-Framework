@@ -16,7 +16,6 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-
 import lombok.extern.java.Log;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -26,8 +25,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.*;
 import org.testng.SkipException;
-
 import udemy.StepDefinitions.Hooks;
+
 @Log
 public class WebDriverHelper extends WebDriverProperties {
   public static WebDriver driver;

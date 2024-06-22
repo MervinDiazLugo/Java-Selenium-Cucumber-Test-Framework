@@ -8,7 +8,6 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
-
 import lombok.extern.java.Log;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.DesiredCapabilities;

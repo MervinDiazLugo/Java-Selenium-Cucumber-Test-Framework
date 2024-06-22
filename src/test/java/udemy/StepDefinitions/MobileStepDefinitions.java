@@ -5,11 +5,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import java.util.List;
-
 import lombok.extern.java.Log;
 import org.openqa.selenium.WebDriver;
 import udemy.mobile.Page.BookingSearchPage;
-import udemy.web.Page.PageBase;
+
 @Log
 public class MobileStepDefinitions extends WebDriverHelper {
   static WebDriver driver;

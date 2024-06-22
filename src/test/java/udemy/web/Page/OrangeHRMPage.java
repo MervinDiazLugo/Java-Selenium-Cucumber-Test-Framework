@@ -2,7 +2,6 @@ package udemy.web.Page;
 
 import config.WebDriverHelper;
 import java.util.List;
-
 import lombok.extern.java.Log;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;

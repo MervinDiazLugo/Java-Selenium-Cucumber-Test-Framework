@@ -6,14 +6,13 @@ import config.WebDriverHelper;
 import io.cucumber.datatable.DataTable;
 import java.util.Collections;
 import java.util.List;
-
 import lombok.extern.java.Log;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
-import org.testng.log4testng.Logger;
+
 @Log
 public class KlimberAssurancePage extends WebDriverHelper {
 
@@ -86,7 +85,8 @@ public class KlimberAssurancePage extends WebDriverHelper {
     DataTable data = createDataTable(table);
     if (data != null) {
       // AtomicInteger i = new AtomicInteger(1);
-      data.cells().forEach(
+      data.cells()
+          .forEach(
               value -> {
                 String KEY = "";
                 String VALUE = "";
@@ -103,13 +103,13 @@ public class KlimberAssurancePage extends WebDriverHelper {
                 }
 
                 if (StringUtils.containsIgnoreCase(KEY, "Nombre")) {
-                    webJsSendKeys(FULL_NAME_LOC, VALUE);
+                  webJsSendKeys(FULL_NAME_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Cód. área")) {
-                    webJsSendKeys(AREA_CODE_LOC, VALUE);
+                  webJsSendKeys(AREA_CODE_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Celular")) {
-                    webJsSendKeys(PHONE_NUMBER_LOC, VALUE);
+                  webJsSendKeys(PHONE_NUMBER_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Provincia")) {
                   selectOptionDropdownByText(PROVINCE_LOC, VALUE);
@@ -199,16 +199,16 @@ public class KlimberAssurancePage extends WebDriverHelper {
                 }
 
                 if (StringUtils.containsIgnoreCase(KEY, "Nombre")) {
-                    webJsSendKeys(NAME_LOC, VALUE);
+                  webJsSendKeys(NAME_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Apellido")) {
-                    webJsSendKeys(SURNAME_LOC, VALUE);
+                  webJsSendKeys(SURNAME_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Fecha de nacimiento")) {
-                    webJsSendKeys(BIRTHDAY_LOC, VALUE);
+                  webJsSendKeys(BIRTHDAY_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "DNI")) {
-                    webJsSendKeys(ID_NUMBER_LOC, VALUE);
+                  webJsSendKeys(ID_NUMBER_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Sexo biológico")) {
                   selectOptionDropdownByText(BIOLOGIC_GENDER_LOC, VALUE);
@@ -217,28 +217,28 @@ public class KlimberAssurancePage extends WebDriverHelper {
                   selectOptionDropdownByText(SELF_GENDER_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "E-mail")) {
-                    webJsSendKeys(EMAIL_LOC, VALUE);
+                  webJsSendKeys(EMAIL_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Cód. área")) {
-                    webJsSendKeys(PHONE_CODE_LOC, VALUE);
+                  webJsSendKeys(PHONE_CODE_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Celular")) {
-                    webJsSendKeys(PHONE_NUMBER_LAST_LOC, VALUE);
+                  webJsSendKeys(PHONE_NUMBER_LAST_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Calle")) {
-                    webJsSendKeys(STREET_LOC, VALUE);
+                  webJsSendKeys(STREET_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Número")) {
-                    webJsSendKeys(HOUSE_NUMBER_LOC, VALUE);
+                  webJsSendKeys(HOUSE_NUMBER_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Piso")) {
-                    webJsSendKeys(FLOOR_LOC, VALUE);
+                  webJsSendKeys(FLOOR_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Departamento")) {
-                    webJsSendKeys(APARTMENT_LOC, VALUE);
+                  webJsSendKeys(APARTMENT_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Código Postal")) {
-                    webJsSendKeys(ZIP_CODE_LOC, VALUE);
+                  webJsSendKeys(ZIP_CODE_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Ciudad")) {
                   sleep(3);

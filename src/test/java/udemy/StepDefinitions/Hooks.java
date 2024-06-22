@@ -11,11 +11,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
 import lombok.extern.java.Log;
 import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.*;
+
 @Log
 public class Hooks extends AbstractTestNGCucumberTests {
 
@@ -27,27 +27,35 @@ public class Hooks extends AbstractTestNGCucumberTests {
 
   @Before("@WebTesting")
   public void initWebDriver(Scenario scenario) throws Exception {
-    log.info("***************************************************************************************************");
+    log.info(
+        "***************************************************************************************************");
     log.info("[ Configuration ] - Initializing driver configuration");
-    log.info("***************************************************************************************************");
+    log.info(
+        "***************************************************************************************************");
     driver = ConfigDriver.initWebConfig();
     mainWindowsHandle.put("main", driver.getWindowHandle());
     this.scenario = scenario;
-    log.info("***************************************************************************************************");
+    log.info(
+        "***************************************************************************************************");
     log.info("[ Scenario ] - " + scenario.getName());
-    log.info("***************************************************************************************************");
+    log.info(
+        "***************************************************************************************************");
   }
 
   @Before("@MobileTesting")
   public void initMobileDriver(Scenario scenario) throws Exception {
-    log.info("***************************************************************************************************");
+    log.info(
+        "***************************************************************************************************");
     log.info("[ Configuration ] - Initializing driver configuration");
-    log.info("***************************************************************************************************");
+    log.info(
+        "***************************************************************************************************");
     driver = ConfigDriver.initMobileConfig();
     this.scenario = scenario;
-    log.info("***************************************************************************************************");
+    log.info(
+        "***************************************************************************************************");
     log.info("[ Scenario ] - " + scenario.getName());
-    log.info("***************************************************************************************************");
+    log.info(
+        "***************************************************************************************************");
   }
 
   private void takeScreenShot(Scenario scenario) {
@@ -75,9 +83,11 @@ public class Hooks extends AbstractTestNGCucumberTests {
       takeScreenShot(scenario);
     }
 
-    log.info("***************************************************************************************************");
+    log.info(
+        "***************************************************************************************************");
     log.info("[ MobileDriver Status ] - Clean and close the instance of the driver");
-    log.info("***************************************************************************************************");
+    log.info(
+        "***************************************************************************************************");
     driver.quit();
   }
 
@@ -88,9 +98,11 @@ public class Hooks extends AbstractTestNGCucumberTests {
       takeScreenShot(scenario);
     }
 
-    log.info("***************************************************************************************************");
+    log.info(
+        "***************************************************************************************************");
     log.info("[ WebDriver Status ] - Clean and close the instance of the driver");
-    log.info("***************************************************************************************************");
+    log.info(
+        "***************************************************************************************************");
     driver.quit();
   }
 

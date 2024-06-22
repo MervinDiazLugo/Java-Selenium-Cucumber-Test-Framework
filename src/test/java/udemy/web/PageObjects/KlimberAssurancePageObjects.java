@@ -2,6 +2,7 @@ package udemy.web.PageObjects;
 
 import lombok.extern.java.Log;
 import org.openqa.selenium.By;
+
 @Log
 public class KlimberAssurancePageObjects {
 

@@ -2,7 +2,6 @@ package config;
 
 import lombok.extern.java.Log;
 import org.openqa.selenium.WebDriver;
-import org.testng.log4testng.Logger;
 
 @Log
 public class ConfigDriver {
@@ -15,10 +14,13 @@ public class ConfigDriver {
     WebDriver driver;
     String platform = baseConfigProperties.getPlatformName();
 
-    log.info("*******************************************************************************************************");
-    log.info("[ POM Configuration ] - Read the basic properties configuration from: ../test.properties");
+    log.info(
+        "*******************************************************************************************************");
+    log.info(
+        "[ POM Configuration ] - Read the basic properties configuration from: ../test.properties");
     log.info("[ POM Configuration ] - Browser: " + platform);
-    log.info("******************************************************************************************************");
+    log.info(
+        "******************************************************************************************************");
 
     driver = WebDriverFactory.createNewDriver(platform);
 

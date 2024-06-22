@@ -10,10 +10,10 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
 import lombok.extern.java.Log;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
+
 @Log
 public class ApiStepDefinitions extends RestAssuredExtension {
 

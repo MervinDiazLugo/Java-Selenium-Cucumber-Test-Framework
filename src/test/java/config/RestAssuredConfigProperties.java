@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.Properties;
-
 import lombok.extern.java.Log;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
+
 @Log
 public class RestAssuredConfigProperties {
   private static Properties prop = new Properties();
