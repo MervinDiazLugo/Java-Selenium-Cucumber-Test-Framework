@@ -14,10 +14,4 @@ import org.testng.annotations.DataProvider;
       "json:target/cucumber/cucumber.json",
       "html:target/cucumber-html-report.html"
     })
-public class WebTestOrangeHRMRunner extends AbstractTestNGCucumberTests {
-  @Override
-  @DataProvider(parallel = true)
-  public Object[][] scenarios() {
-    return super.scenarios();
-  }
-}
+public class WebTestOrangeHRMRunner extends AbstractTestNGCucumberTests {}
