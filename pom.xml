@@ -14,9 +14,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <selenium.version>3.141.59</selenium.version>
         <maven.cucumber.reporting.version>5.7.8</maven.cucumber.reporting.version>
-        <defaultSuiteFiles>WebTestKlimberRunnerNoParams.xml,</defaultSuiteFiles>
         <client>client1</client>
         <suiteFile>${defaultSuiteFiles}</suiteFile>
+        <defaultSuiteFiles>WebTestKlimberRunnerNoParams.xml,</defaultSuiteFiles>
     </properties>
 
     <dependencyManagement>
@@ -102,7 +102,7 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.5</version>
+            <version>7.7.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
