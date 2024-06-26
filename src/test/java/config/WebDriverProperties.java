@@ -85,6 +85,11 @@ public class WebDriverProperties {
     return TESTNG_ENVIRONMENT;
   }
 
+  public static String setTestNgClient(String value) {
+    TESTNG_CLIENT = value;
+    return TESTNG_CLIENT;
+  }
+
   public String getTestNgEnvironment() {
     return TESTNG_ENVIRONMENT;
   }
@@ -97,10 +102,6 @@ public class WebDriverProperties {
     return SYSTEM_ENVIRONMENT;
   }
 
-  public static String setTestNgClient(String value) {
-    TESTNG_CLIENT = value;
-    return TESTNG_CLIENT;
-  }
 
   public String getTestNgClient() {
     return TESTNG_CLIENT;
