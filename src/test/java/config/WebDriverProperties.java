@@ -82,11 +82,13 @@ public class WebDriverProperties {
 
   public static String setTestNgEnvironment(String value) {
     TESTNG_ENVIRONMENT = value;
+    log.info(TESTNG_ENVIRONMENT);
     return TESTNG_ENVIRONMENT;
   }
 
   public static String setTestNgClient(String value) {
     TESTNG_CLIENT = value;
+    log.info(TESTNG_CLIENT);
     return TESTNG_CLIENT;
   }
 
@@ -99,9 +101,9 @@ public class WebDriverProperties {
   }
 
   public String getSystemEnvironment() {
+    log.info("SYSTEM webdriver.env for this test set is " + SYSTEM_ENVIRONMENT);
     return SYSTEM_ENVIRONMENT;
   }
-
 
   public String getTestNgClient() {
     return TESTNG_CLIENT;
@@ -112,6 +114,7 @@ public class WebDriverProperties {
   }
 
   public String getSystemClient() {
+    log.info("SYSTEM webdriver.client for this test set is " + SYSTEM_CLIENT);
     return SYSTEM_CLIENT;
   }
 
