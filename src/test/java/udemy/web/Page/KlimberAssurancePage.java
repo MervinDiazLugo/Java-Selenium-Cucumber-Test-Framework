@@ -6,19 +6,16 @@ import config.WebDriverHelper;
 import io.cucumber.datatable.DataTable;
 import java.util.Collections;
 import java.util.List;
+import lombok.extern.java.Log;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.SkipException;
-import org.testng.log4testng.Logger;
-import udemy.web.PageObjects.KlimberAssurancePageObjects;
 
+@Log
 public class KlimberAssurancePage extends WebDriverHelper {
-  /** ****** Log Attribute ******* */
-  private static Logger log = Logger.getLogger(KlimberAssurancePage.class);
 
-  KlimberAssurancePageObjects klimberAssurancePageObjects = new KlimberAssurancePageObjects();
   private static final int EXPLICIT_TIMEOUT = 20;
 
   public void waitForFirstStepElements() {
@@ -106,13 +103,13 @@ public class KlimberAssurancePage extends WebDriverHelper {
                 }
 
                 if (StringUtils.containsIgnoreCase(KEY, "Nombre")) {
-                  webSendKeys(FULL_NAME_LOC, VALUE);
+                  webJsSendKeys(FULL_NAME_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Cód. área")) {
-                  webSendKeys(AREA_CODE_LOC, VALUE);
+                  webJsSendKeys(AREA_CODE_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Celular")) {
-                  webSendKeys(PHONE_NUMBER_LOC, VALUE);
+                  webJsSendKeys(PHONE_NUMBER_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Provincia")) {
                   selectOptionDropdownByText(PROVINCE_LOC, VALUE);
@@ -142,7 +139,7 @@ public class KlimberAssurancePage extends WebDriverHelper {
 
   public void setInputValues(By locator, String key, String valueToBeSet) {
     if (isWebElementDisplayed(locator)) {
-      WebElement divElements = driver.findElement(locator);
+      WebElement divElements = getElement(locator);
       WebElement removeElem = divElements.findElement(STEPPER_REMOVE_BUTTON);
       WebElement addElem = divElements.findElement(STEPPER_ADD_BUTTON);
       WebElement valueElem = null;
@@ -202,16 +199,16 @@ public class KlimberAssurancePage extends WebDriverHelper {
                 }
 
                 if (StringUtils.containsIgnoreCase(KEY, "Nombre")) {
-                  webSendKeys(NAME_LOC, VALUE);
+                  webJsSendKeys(NAME_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Apellido")) {
-                  webSendKeys(SURNAME_LOC, VALUE);
+                  webJsSendKeys(SURNAME_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Fecha de nacimiento")) {
-                  webSendKeys(BIRTHDAY_LOC, VALUE);
+                  webJsSendKeys(BIRTHDAY_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "DNI")) {
-                  webSendKeys(ID_NUMBER_LOC, VALUE);
+                  webJsSendKeys(ID_NUMBER_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Sexo biológico")) {
                   selectOptionDropdownByText(BIOLOGIC_GENDER_LOC, VALUE);
@@ -220,28 +217,28 @@ public class KlimberAssurancePage extends WebDriverHelper {
                   selectOptionDropdownByText(SELF_GENDER_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "E-mail")) {
-                  webSendKeys(EMAIL_LOC, VALUE);
+                  webJsSendKeys(EMAIL_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Cód. área")) {
-                  webSendKeys(PHONE_CODE_LOC, VALUE);
+                  webJsSendKeys(PHONE_CODE_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Celular")) {
-                  webSendKeys(PHONE_NUMBER_LAST_LOC, VALUE);
+                  webJsSendKeys(PHONE_NUMBER_LAST_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Calle")) {
-                  webSendKeys(STREET_LOC, VALUE);
+                  webJsSendKeys(STREET_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Número")) {
-                  webSendKeys(HOUSE_NUMBER_LOC, VALUE);
+                  webJsSendKeys(HOUSE_NUMBER_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Piso")) {
-                  webSendKeys(FLOOR_LOC, VALUE);
+                  webJsSendKeys(FLOOR_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Departamento")) {
-                  webSendKeys(APARTMENT_LOC, VALUE);
+                  webJsSendKeys(APARTMENT_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Código Postal")) {
-                  webSendKeys(ZIP_CODE_LOC, VALUE);
+                  webJsSendKeys(ZIP_CODE_LOC, VALUE);
 
                 } else if (StringUtils.containsIgnoreCase(KEY, "Ciudad")) {
                   sleep(3);

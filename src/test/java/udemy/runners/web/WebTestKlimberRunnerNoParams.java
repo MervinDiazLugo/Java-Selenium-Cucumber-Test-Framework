@@ -2,7 +2,9 @@ package udemy.runners.web;
 
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
+import lombok.extern.java.Log;
 
+@Log
 @CucumberOptions(
     tags = "@UdemyWebTest and not @Ignore",
     features = "src/test/resources/udemy/WebTest/Klimber",

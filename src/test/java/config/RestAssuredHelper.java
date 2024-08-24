@@ -11,15 +11,15 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import lombok.extern.java.Log;
 import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.testng.SkipException;
-import org.testng.log4testng.Logger;
 
+@Log
 public class RestAssuredHelper extends RestAssuredExtension {
-  public static Logger log = Logger.getLogger(RestAssuredHelper.class);
 
   public static JSONObject testData = setTestData();
 

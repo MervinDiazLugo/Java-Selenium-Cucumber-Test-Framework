@@ -1,6 +1,6 @@
 package config;
 
-import static config.WebBaseConfigProperties.getCurrentPath;
+import static config.WebDriverProperties.getCurrentPath;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
@@ -8,13 +8,12 @@ import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
+import lombok.extern.java.Log;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.testng.log4testng.Logger;
 
+@Log
 public class AndroidDriverInitializer extends AbstractDriverInitializer {
-  /** ***** Log Attribute ******* */
-  private static Logger log = Logger.getLogger(AndroidDriverInitializer.class);
 
   private AndroidDriverProperties androidConfigProperties = new AndroidDriverProperties();
   private final DesiredCapabilities caps = new DesiredCapabilities();

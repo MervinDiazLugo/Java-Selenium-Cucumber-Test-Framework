@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="methods" data-provider-thread-count="3" verbose="2">
+
+    <test name="Orange" >
+        <parameter name="browser" value="CHROME"/>
+        <classes>
+            <class name="udemy.runners.web.WebTestOrangeHRMRunner"/>
+        </classes>
+    </test>
+</suite>

@@ -3,9 +3,11 @@ package config;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
+import lombok.extern.java.Log;
 import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
 
+@Log
 public class AndroidDriverProperties {
   private static Properties prop = new Properties();
   private static final String GLOBAL_DATA_FILE_LOCATION = "/test.properties";

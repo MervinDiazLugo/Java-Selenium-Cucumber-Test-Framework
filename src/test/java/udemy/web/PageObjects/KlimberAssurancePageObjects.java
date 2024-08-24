@@ -1,7 +1,9 @@
 package udemy.web.PageObjects;
 
+import lombok.extern.java.Log;
 import org.openqa.selenium.By;
 
+@Log
 public class KlimberAssurancePageObjects {
 
   public static final String GENERIC_TEXT_LOC = "//*[contains(text(), '%s')]";

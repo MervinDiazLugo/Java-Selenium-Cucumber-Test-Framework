@@ -9,11 +9,12 @@ Feature: An example
       | Provincia | CABA                        |
       | Cód. área | 11                          |
       | Celular   | 22500000                    |
+    Then I take an Screenshot
     And click on Cotizá button
     And I wait for second step elements are loaded
     Then I fill following text boxes:
-      | Cantidad de adultos    | 2 |
-      | Menores de 12 años     | 1 |
+      | Cantidad de adultos    | 3 |
+      | Menores de 12 años     | 2 |
     And click on Siguiente button
     And I wait for last step elements are loaded
     Then I fill registration form with values:

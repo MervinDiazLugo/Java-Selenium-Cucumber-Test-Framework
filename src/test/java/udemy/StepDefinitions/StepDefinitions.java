@@ -2,19 +2,20 @@ package udemy.StepDefinitions;
 
 import config.WebDriverHelper;
 import io.cucumber.java.en.*;
+import java.io.IOException;
 import java.util.List;
+import lombok.extern.java.Log;
 import org.openqa.selenium.WebDriver;
-import org.testng.log4testng.Logger;
-import udemy.mobile.Page.BookingSearchPage;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import udemy.web.Page.KlimberAssurancePage;
-import udemy.web.Page.PageBase;
+import udemy.web.Page.OrangeHRMPage;
 
+@Log
 public class StepDefinitions extends WebDriverHelper {
   static WebDriver driver;
-  private static Logger log = Logger.getLogger(StepDefinitions.class);
-  private static PageBase basePage = new PageBase();
   private static KlimberAssurancePage klimberAssurance = new KlimberAssurancePage();
-  private static BookingSearchPage bookingSearchPage = new BookingSearchPage();
+  private static OrangeHRMPage orangeHRMPage = new OrangeHRMPage();
 
   @Given("an example scenario")
   public void anExampleScenario() {
@@ -69,5 +70,51 @@ public class StepDefinitions extends WebDriverHelper {
   @Then("I fill registration form with values:")
   public void iFillRegistrationFormWithValues(List<List<String>> table) {
     klimberAssurance.setLastStepTextBoxes(table);
+  }
+
+  @Given("^The User fill username text box$")
+  public void theUserFillUsernameTextBox() {
+    orangeHRMPage.fillUsername("Admin");
+  }
+
+  @And("^The User fill password text box$")
+  public void theUserFillPasswordTextBox() {
+    orangeHRMPage.fillPassword("admin123");
+  }
+
+  @When("^The User clicks Login button$")
+  public void theUserClicksLoginButton() {
+    orangeHRMPage.clickLoginButton();
+  }
+
+  @When("^the user is Logged in$")
+  public void theUserIsLoggedIn() {
+    orangeHRMPage.login("Admin", "admin123");
+  }
+
+  @Then("^Verify the user is logged in$")
+  public void verifyTheUserIsLoggedIn() {
+    WebElement userBulletElm = orangeHRMPage.getUserBulletElem(driver);
+    Assert.assertNotNull(userBulletElm, "El login fue incorrecto");
+  }
+
+  @Then("^The user go to System user list$")
+  public void theUserGoToSystemUserList() {
+    orangeHRMPage.goToSystemAdminUsers(driver);
+  }
+
+  @When("^Verify (.*?) user is present in the list$")
+  public void verifyAdminUserIsPresentInTheList(String userName) {
+    orangeHRMPage.getSystemUserList(userName);
+  }
+
+  @When("^the Admin user is Logged in$")
+  public void theAdminUserIsLoggedIn() {
+    orangeHRMPage.loginAdminUser();
+  }
+
+  @Then("I take an Screenshot")
+  public void iTakeAnScreenshot() throws IOException {
+    takeScreenShot(Hooks.scenario);
   }
 }
