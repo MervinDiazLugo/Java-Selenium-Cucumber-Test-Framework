@@ -10,7 +10,6 @@ import io.restassured.specification.RequestSpecification;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
 import org.testng.Assert;
 import org.testng.SkipException;
 
@@ -20,7 +19,7 @@ import java.net.URISyntaxException;
 import static org.hamcrest.Matchers.*;
 
 
-public class RestAssuredTest {
+public class RestAssuredGetTest {
 
 
 
@@ -29,9 +28,8 @@ public class RestAssuredTest {
         RestAssured.baseURI = "https://restful-booker.herokuapp.com";
         RequestSpecification request = RestAssured.given();
         Response response = request.get("/ping");
-        ResponseBody body = response.getBody();
         Assert.assertEquals(response.getStatusCode(), 201);
-        Assert.assertEquals(body.asString(), "Created");
+        Assert.assertEquals(response.asString(), "Created");
     }
 
     @Test
