@@ -1,5 +1,6 @@
 package udemy.test;
 
+import config.RestAssuredHelper;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.parsing.Parser;
@@ -33,6 +34,7 @@ public class RestAssuredPostTest {
 
     JSONParser parser = new JSONParser();
 
+    RestAssuredHelper restAssuredHelper = new RestAssuredHelper();
 
 
     RestAssuredPostTest(){
@@ -47,6 +49,8 @@ public class RestAssuredPostTest {
         bookingdates.put("checkout", "2024-08-30");
         createBooking.put("bookingdates", bookingdates);
         createBooking.put("additionalneeds", "No requierements");
+
+        restAssuredHelper.testData.put("additionalneeds", "Internet connection");
     }
 
 
@@ -156,7 +160,10 @@ public class RestAssuredPostTest {
         //request.header("Cookie", "token=".concat(TOKEN));
 
         //SERIALIZACION
-        request.body(getFileBody("/src/test/resources/data/jsonData/createBooking.json"));
+        String body = getFileBody("/src/test/resources/data/jsonData/createBooking.json");
+        body = restAssuredHelper.insertParams(body);
+
+        request.body(body);
         Response response = request.post("/booking");
         response.prettyPrint();
 
