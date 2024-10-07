@@ -1,5 +1,6 @@
 package config;
 
+import com.github.javafaker.Faker;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.PerformsTouchActions;
@@ -37,6 +38,8 @@ public class WebDriverHelper extends WebDriverProperties {
   private static final String FORMAT_DATE = "dd/MM/yyyy";
 
   private static final int RETRY = 20;
+
+  Faker faker = new Faker();
 
   public WebDriverHelper() {
     driver = Hooks.driver;
