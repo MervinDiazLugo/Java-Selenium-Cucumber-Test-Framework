@@ -150,7 +150,7 @@ public class RestAssuredHelper extends RestAssuredExtension {
     return Year.now().getValue();
   }
 
-  public static Date parseDate(String rawDate) throws java.text.ParseException {
+  public static Date parseDate(String rawDate) {
     Date parseDate = new Date();
     SimpleDateFormat format = new SimpleDateFormat(FORMAT_DATE);
 
@@ -300,7 +300,7 @@ public class RestAssuredHelper extends RestAssuredExtension {
   public static String retrieveResponse(String key) {
     String value = "";
     ArrayList<String> arrayValue = new ArrayList<>();
-    String classType = response.getBody().path(key).getClass().toString();
+    String classType = response.getBody().path(key).toString();
     if (response != null && response.getBody() != null) {
       if (response.getBody().path(key) != null) {
         if ("class java.util.ArrayList".equals(classType)) {
