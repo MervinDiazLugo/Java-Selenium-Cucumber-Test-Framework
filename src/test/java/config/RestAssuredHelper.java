@@ -11,6 +11,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.ResponseBody;
 import lombok.extern.java.Log;
 import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONObject;
@@ -318,4 +321,17 @@ public class RestAssuredHelper extends RestAssuredExtension {
 
     return value;
   }
+
+  public String retrieveJsonPathResponse(String key) {
+    String value = "";
+    if (jsonPathResponse != null && jsonPathResponse.get(key) != null) {
+      value = jsonPathResponse.get(key).toString();
+    } else {
+      throw new SkipException("Response is null or empty");
+    }
+    return value;
+  }
+
 }
+
+

@@ -6,7 +6,9 @@ import static config.RestAssuredHelper.insertParams;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import io.restassured.response.ResponseBody;
 import io.restassured.response.ResponseOptions;
 import io.restassured.specification.RequestSpecification;
 import java.net.URI;
@@ -29,6 +31,8 @@ public class RestAssuredExtension extends RestAssuredConfigProperties {
 
   static ResponseOptions<Response> authToken;
   public static ResponseOptions<Response> response;
+  JsonPath jsonPathResponse;
+  ResponseBody responseBody;
 
   public RestAssuredExtension() {
     apiVersion = getApiVersion();
@@ -93,6 +97,8 @@ public class RestAssuredExtension extends RestAssuredConfigProperties {
       apiBuilder.setBaseUri(apiUri);
       RequestSpecification requestToken = RestAssured.given().spec(apiBuilder.build());
       response = requestToken.get(new URI(path));
+      responseBody = response.getBody();
+      jsonPathResponse = response.body().jsonPath();
       // validateAuth();
 
     } catch (IllegalArgumentException | NullPointerException | URISyntaxException e) {
@@ -107,6 +113,8 @@ public class RestAssuredExtension extends RestAssuredConfigProperties {
       apiBuilder.setBaseUri(apiUri);
       RequestSpecification requestToken = RestAssured.given().spec(apiBuilder.build());
       response = requestToken.delete(new URI(path));
+      responseBody = response.getBody();
+      jsonPathResponse = response.body().jsonPath();
       // validateAuth();
 
     } catch (IllegalArgumentException | NullPointerException | URISyntaxException e) {
@@ -131,6 +139,8 @@ public class RestAssuredExtension extends RestAssuredConfigProperties {
       log.info(body);
       RequestSpecification requestToken = RestAssured.given().spec(apiBuilder.build());
       response = requestToken.post(new URI(path));
+      responseBody = response.getBody();
+      jsonPathResponse = response.body().jsonPath();
       // validateAuth();
     } catch (IllegalArgumentException | NullPointerException | URISyntaxException e) {
       throw new SkipException("Authentication failed " + e);
@@ -154,7 +164,8 @@ public class RestAssuredExtension extends RestAssuredConfigProperties {
       log.info(body);
       RequestSpecification requestToken = RestAssured.given().spec(apiBuilder.build());
       response = requestToken.put(new URI(path));
-
+      responseBody = response.getBody();
+      jsonPathResponse = response.body().jsonPath();
       // validateAuth();
 
     } catch (IllegalArgumentException | NullPointerException | URISyntaxException e) {
