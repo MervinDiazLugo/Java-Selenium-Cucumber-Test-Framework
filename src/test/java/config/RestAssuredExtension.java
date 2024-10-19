@@ -115,7 +115,6 @@ public class RestAssuredExtension extends RestAssuredConfigProperties {
       response = requestToken.delete(new URI(path));
       responseBody = response.getBody();
       jsonPathResponse = response.body().jsonPath();
-      // validateAuth();
 
     } catch (IllegalArgumentException | NullPointerException | URISyntaxException e) {
       throw new SkipException("Api delete failed " + e);

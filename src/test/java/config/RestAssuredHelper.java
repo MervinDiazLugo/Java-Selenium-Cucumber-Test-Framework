@@ -244,25 +244,15 @@ public class RestAssuredHelper extends RestAssuredExtension {
   public static void getDataFromTable(List<List<String>> table) {
     DataTable data = createDataTable(table);
     if (data != null) {
-      data.cells()
-          .forEach(
-              value -> {
-                String key = "";
-                String val = "";
-                try {
-                  List<String> rField = Collections.singletonList(value.get(0));
-                  List<String> rValue = Collections.singletonList(value.get(1));
-                  key = rField.get(0);
-                  val = rValue.get(0);
-                } catch (NullPointerException e) {
-                  throw new SkipException(
-                      String.format("key specified on table doesn't exist: %s", key));
-                }
-                if (StringUtils.isEmpty(val)) {
-                  val = "";
-                }
-                saveInTestData(key, val);
-              });
+      data.cells().forEach(value -> {
+        //create variables as columns you have.
+        String key = value.get(0);
+        String val = value.get(1);
+        if (StringUtils.isEmpty(val)) {
+          val = "";
+        }
+        saveInTestData(key, val);
+      });
     }
   }
 
