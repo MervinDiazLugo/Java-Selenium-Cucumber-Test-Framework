@@ -25,11 +25,10 @@ public class RestAssuredExtension extends RestAssuredConfigProperties {
   public static String apiVersion;
   public static String apiUri;
   public static String authEndpoint = getAuthenticationEndpoint();
-  public static String apiPath;
+  static ResponseOptions<Response> authToken;
 
   public static boolean isAlreadyAuthenticated;
 
-  static ResponseOptions<Response> authToken;
   public static ResponseOptions<Response> response;
   JsonPath jsonPathResponse;
   ResponseBody responseBody;
@@ -37,15 +36,11 @@ public class RestAssuredExtension extends RestAssuredConfigProperties {
   public RestAssuredExtension() {
     apiVersion = getApiVersion();
     apiUri = getBaseUri().concat(apiVersion);
-    authEndpoint = getAuthenticationEndpoint();
+    authentication();
     try {
       apiBuilder.setBaseUri(apiUri);
       apiBuilder.setContentType(ContentType.JSON);
       apiBuilder.setAccept("*/*");
-      if (!isAlreadyAuthenticated) {
-        // authentication();
-        apiBuilder.addHeader("api_key", "special-key");
-      }
 
     } catch (IllegalArgumentException e) {
       log.info("Base URI cannot be null, check configProperties");
@@ -57,28 +52,34 @@ public class RestAssuredExtension extends RestAssuredConfigProperties {
    *
    * @return Api responses
    */
-  public static ResponseOptions<Response> authentication() {
+  public ResponseOptions<Response> authentication() {
     RequestSpecBuilder authBuilder = new RequestSpecBuilder();
+    authBuilder.setBaseUri(apiUri);
+    authEndpoint = getAuthenticationEndpoint();
     setDefaultHeaders();
-    try {
-      authBuilder.setBaseUri(apiUri);
-      authBuilder.addQueryParam("username", getApiUser());
-      authBuilder.addQueryParam("password", getApiPassword());
-      RequestSpecification requestToken = RestAssured.given().spec(authBuilder.build());
-      authToken = requestToken.post(new URI(authEndpoint));
 
-      validateAuth();
-
-    } catch (IllegalArgumentException | NullPointerException | URISyntaxException e) {
-      throw new SkipException("Authentication failed " + e.getMessage());
+    if (!isAlreadyAuthenticated) {
+      if(StringUtils.contains(apiUri, "petstore.swagger.io")){
+        apiBuilder.addHeader("api_key", "special-key");
+        isAlreadyAuthenticated = true;
+      }else{
+        postAuth(authBuilder);
+      }
     }
-    isAlreadyAuthenticated = true;
     return authToken;
   }
 
-  private static void validateAuth() {
-    if (authToken.getStatusCode() != 200) {
-      throw new SkipException("Authentication failed " + authToken.getStatusCode());
+  private void postAuth(RequestSpecBuilder authBuilder){
+    try {
+      RequestSpecification requestToken = RestAssured.given().spec(authBuilder.build());
+      authToken = requestToken.post(authEndpoint);
+      if (authToken.getStatusCode() != 200) {
+        throw new SkipException("Authentication failed " + authToken.getStatusCode());
+      }else{
+        isAlreadyAuthenticated = true;
+      }
+    } catch (IllegalArgumentException | NullPointerException e) {
+      throw new SkipException("Authentication failed " + e.getMessage());
     }
   }
 
