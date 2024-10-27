@@ -11,9 +11,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.ResponseBody;
 import lombok.extern.java.Log;
 import org.apache.commons.lang3.StringUtils;
 import org.json.simple.JSONObject;
@@ -244,15 +241,17 @@ public class RestAssuredHelper extends RestAssuredExtension {
   public static void getDataFromTable(List<List<String>> table) {
     DataTable data = createDataTable(table);
     if (data != null) {
-      data.cells().forEach(value -> {
-        //create variables as columns you have.
-        String key = value.get(0);
-        String val = value.get(1);
-        if (StringUtils.isEmpty(val)) {
-          val = "";
-        }
-        saveInTestData(key, val);
-      });
+      data.cells()
+          .forEach(
+              value -> {
+                // create variables as columns you have.
+                String key = value.get(0);
+                String val = value.get(1);
+                if (StringUtils.isEmpty(val)) {
+                  val = "";
+                }
+                saveInTestData(key, val);
+              });
     }
   }
 
@@ -321,7 +320,4 @@ public class RestAssuredHelper extends RestAssuredExtension {
     }
     return value;
   }
-
 }
-
-

@@ -59,23 +59,23 @@ public class RestAssuredExtension extends RestAssuredConfigProperties {
     setDefaultHeaders();
 
     if (!isAlreadyAuthenticated) {
-      if(StringUtils.contains(apiUri, "petstore.swagger.io")){
+      if (StringUtils.contains(apiUri, "petstore.swagger.io")) {
         apiBuilder.addHeader("api_key", "special-key");
         isAlreadyAuthenticated = true;
-      }else{
+      } else {
         postAuth(authBuilder);
       }
     }
     return authToken;
   }
 
-  private void postAuth(RequestSpecBuilder authBuilder){
+  private void postAuth(RequestSpecBuilder authBuilder) {
     try {
       RequestSpecification requestToken = RestAssured.given().spec(authBuilder.build());
       authToken = requestToken.post(authEndpoint);
       if (authToken.getStatusCode() != 200) {
         throw new SkipException("Authentication failed " + authToken.getStatusCode());
-      }else{
+      } else {
         isAlreadyAuthenticated = true;
       }
     } catch (IllegalArgumentException | NullPointerException e) {
